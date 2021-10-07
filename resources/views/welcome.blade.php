@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Hubin SMKN 13 Bandung
                 </div>
 
                 <div class="links">

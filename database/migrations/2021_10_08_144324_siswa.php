@@ -14,10 +14,18 @@ class Siswa extends Migration
     public function up()
     {
         Schema::create('siswa', function (Blueprint $table) {
-            $table->integer('nis')->unique();
+            $table->integer('nis')->unsigned()->unique();
             $table->string('password');
             $table->string('nama');
-            $table->string('kelas');
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->tinyInteger('kelas')->unsigned();
+            $table->enum('jurusan', ['AK', 'RPL', 'TKJ']);
+            $table->year('tahun');
+            $table->integer('id_industri')->unsigned()->nullable();
+            $table->foreign('id_industri')
+                ->references('id')
+                ->on('industri')
+                ->onDelete('cascade');
             $table->rememberToken();
             $table->primary('nis');
         });

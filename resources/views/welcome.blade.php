@@ -67,14 +67,15 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                    @auth('siswa')
+                        <a href="{{ route('siswa.home') }}">Home Siswa</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
+                        <a href="{{ route('siswa.login') }}">Login Siswa</a>
+                    @endauth
+                    @auth('admin')
+                        <a href="{{ route('admin.home') }}">Home Admin</a>
+                    @else
+                        <a href="{{ route('admin.login') }}">Login Admin</a>
                     @endauth
                 </div>
             @endif
@@ -93,7 +94,6 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                    <a href="https://github.com/laravel/laravel">Tes 333</a>
                 </div>
             </div>
         </div>

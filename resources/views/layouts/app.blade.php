@@ -57,6 +57,19 @@
                                 @endauth
                             </li>
                         @else
+                            @auth('admin')
+                                <!--
+                                <li class="nav-item">
+                                    <a class="nav-link" href="industri">Data Industri</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="siswa">Data Siswa</a>
+                                </li>
+                                -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.pengaturan') }}">Pengaturan Akun</a>
+                                </li>
+                            @endauth
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @auth('admin') {{ Auth::user()->username }} @endauth

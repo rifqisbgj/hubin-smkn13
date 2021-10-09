@@ -32,4 +32,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', 'AdminLoginController@loginForm')->name('admin.login');
     Route::post('/login', 'AdminLoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'AdminLoginController@logout')->name('admin.logout');
+    Route::get('/pengaturan', 'AdminController@pengaturan')->name('admin.pengaturan');
+    Route::post('/pengaturan', 'AdminController@pengaturanSubmit')->name('admin.pengaturan.submit');
 });

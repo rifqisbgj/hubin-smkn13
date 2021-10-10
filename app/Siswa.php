@@ -9,9 +9,17 @@ class Siswa extends Authenticatable
     protected $table = 'siswa';
     protected $guard = 'siswa';
     protected $primaryKey = 'nis';
+    public $timestamps = false;
 
     protected $fillable = [
-        'nis', 'password', 'nama', 'kelas',
+        'nis',
+        'password',
+        'nama',
+        'jenis_kelamin',
+        'jurusan',
+        'kelas',
+        'tahun',
+        'id_industri',
     ];
 
     protected $hidden = [

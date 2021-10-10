@@ -9,7 +9,9 @@ class Admin extends Authenticatable
     protected $table = 'admin';
     protected $guard = 'admin';
     protected $primaryKey = 'username';
+    protected $keyType = 'string';
     public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'username', 'password',

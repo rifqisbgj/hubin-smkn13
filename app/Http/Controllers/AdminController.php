@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Siswa;
 
 class AdminController extends Controller
 {
@@ -52,6 +53,7 @@ class AdminController extends Controller
 
     public function dataSiswa()
     {
-        return view('admin.siswa');
+        $datasiswa = Siswa::toBase()->get();
+        return view('admin.siswa', compact('datasiswa'));
     }
 }

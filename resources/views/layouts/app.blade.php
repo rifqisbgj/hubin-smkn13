@@ -13,6 +13,7 @@
     <script src="{{ asset('js/jquery-3.5.1.slim.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    @stack('siswa-form')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -53,10 +54,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="industri">Data Industri</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="siswa">Data Siswa</a>
-                                </li>
                                 -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.data.siswa') }}">Data Siswa</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.pengaturan') }}">Pengaturan Akun</a>
                                 </li>

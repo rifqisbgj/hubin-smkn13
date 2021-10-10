@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">Login Admin</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.login.submit') }}">
@@ -47,6 +47,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">Login</button>
+                                <a class="ml-3 card-link" href="{{ route('siswa.login') }}">Bukan Admin?</a>
                             </div>
                         </div>
                     </form>

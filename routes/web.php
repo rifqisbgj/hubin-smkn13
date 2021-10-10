@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'dashboard')->name('home');
+Route::view('/tentang', 'tentang')->name('tentang');
 
 Auth::routes([
     'register' => false,
@@ -34,4 +35,5 @@ Route::prefix('admin')->group(function () {
     Route::get('/logout', 'AdminLoginController@logout')->name('admin.logout');
     Route::get('/pengaturan', 'AdminController@pengaturan')->name('admin.pengaturan');
     Route::post('/pengaturan', 'AdminController@pengaturanSubmit')->name('admin.pengaturan.submit');
+    Route::get('/data/siswa', 'AdminController@dataSiswa')->name('admin.data.siswa');
 });

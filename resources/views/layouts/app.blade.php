@@ -41,23 +41,14 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                @auth('siswa')
-                                    <a class="nav-link" href="{{ route('siswa.home') }}">Home Siswa</a>
-                                @else
-                                    <a class="nav-link" href="{{ route('siswa.login') }}">Login Siswa</a>
-                                @endauth
-                            </li>
-                            <li class="nav-item">
-                                @auth('admin')
-                                    <a class="nav-link" href="{{ route('admin.home') }}">Home Admin</a>
-                                @else
-                                    <a class="nav-link" href="{{ route('admin.login') }}">Login Admin</a>
-                                @endauth
-                            </li>
-                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tentang') }}">Tentang</a>
+                        </li>
+                        @auth
                             @auth('admin')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.home') }}">Home</a>
+                                </li>
                                 <!--
                                 <li class="nav-item">
                                     <a class="nav-link" href="industri">Data Industri</a>
@@ -70,17 +61,32 @@
                                     <a class="nav-link" href="{{ route('admin.pengaturan') }}">Pengaturan Akun</a>
                                 </li>
                             @endauth
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    @auth('admin') {{ Auth::user()->username }} @endauth
-                                    @auth('siswa') {{ Auth::user()->nama }} @endauth
-                                </a>
+                            @auth('siswa')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('siswa.home') }}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">Lihat Data Pemetaan</a>
+                                </li>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route(Auth::getDefaultDriver() . ".logout") }}">Logout</a>
-                                </div>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">Hasil Data Pemetaan</a>
+                                </li>
+                            @endauth
+
+                            <span class="navbar-text">
+                                @auth('admin') {{ Auth::user()->username }} @endauth
+                                @auth('siswa') {{ Auth::user()->nama }} {{ Auth::user()->nis }} @endauth
+                            </span>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route(Auth::getDefaultDriver() . ".logout") }}">Logout</a>
                             </li>
-                        @endguest
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('siswa.login') }}">Login</a>
+                            </li>
+                        @endauth
                     </ul>
                 </div>
             </div>

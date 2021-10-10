@@ -49,4 +49,9 @@ class AdminController extends Controller
 
         return redirect()->back()->withInput($credentials);
     }
+
+    public function dataSiswa()
+    {
+        return view('admin.siswa');
+    }
 }

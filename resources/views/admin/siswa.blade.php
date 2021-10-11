@@ -7,17 +7,28 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-3">
+            @if(session('success'))
+                <div class="alert alert-success mb-2" role="alert">
+                    {{ session('status')[1] }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-warning mb-2" role="alert">
+                    Siswa sudah terdaftar
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">Keterangan Siswa</div>
                 <div class="card-body">
-                    <form>
+                    <form method="POST" action="{{ route('admin.tambah.siswa') }}">
+                        @csrf
                         <div class="form-group">
                             <label class="form-label">Nomor Induk Siswa</label>
-                            <input class="form-control form-control-sm" type="number" name="nis" required>
+                            <input class="form-control form-control-sm" type="number" name="nis" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Nama Siswa</label>
-                            <input class="form-control form-control-sm" name="nama" required>
+                            <input class="form-control form-control-sm" name="nama" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Jenis Kelamin</label>
@@ -48,7 +59,7 @@
                             </div>
                             <div class="col">
                                 <label class="form-label">Tahun</label>
-                                <input class="form-control form-control-sm" name="tahun" type="number" min="2020" max="{{ date("Y") }}" placeholder="{{ date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
+                                <input class="form-control form-control-sm" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
                             </div>
                         </div>
                         <div class="text-right">
@@ -86,7 +97,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="card-body pt-0" style="overflow-y: auto; height: 75vh">
+                <div class="card-body p-0" style="overflow-y: auto; height: 75vh">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -101,7 +112,7 @@
                         </thead>
                         <tbody>
                             @forelse ($datasiswa as $siswa)
-                                <tr>
+                            <tr>
                                     <td>{{ $siswa->nis }}</td>
                                     <td>{{ $siswa->nama }}</td>
                                     <td>{{ $siswa->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>

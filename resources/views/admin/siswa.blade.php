@@ -7,65 +7,59 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-3">
-            @if (session('status'))
-                <div class="alert alert-{{ session('status')[0] }} mb-2" role="alert">
+            @if(session('success'))
+                <div class="alert alert-success mb-2" role="alert">
                     {{ session('status')[1] }}
                 </div>
             @endif
             @if ($errors->any())
                 <div class="alert alert-warning mb-2" role="alert">
-                    {{ dd($errors) }}
+                    Siswa sudah terdaftar
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">{{ old() ? 'Edit Siswa' : 'Keterangan Siswa' }}</div>
+                <div class="card-header">Keterangan Siswa</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ old() ? route('admin.update.siswa') : route('admin.tambah.siswa') }}">
+                    <form method="POST" action="{{ route('admin.tambah.siswa') }}">
                         @csrf
-
-                        @if (old())
-                            <input type="hidden" name="old_nis" value="{{ old('nis') }}">
-                        @endif
-
                         <div class="form-group">
                             <label class="form-label">Nomor Induk Siswa</label>
-                            <input class="form-control form-control-sm" type="number" name="nis" value="{{ old('nis') }}" autocomplete="off" required>
+                            <input class="form-control form-control-sm" type="number" name="nis" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Nama Siswa</label>
-                            <input class="form-control form-control-sm" name="nama" value="{{ old('nama') }}" autocomplete="off" required>
+                            <input class="form-control form-control-sm" name="nama" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Jenis Kelamin</label>
                             <select class="form-control form-control-sm" name="jenis_kelamin" required>
-                                <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                                <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
+                                <option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Jurusan</label>
                             <select class="form-control form-control-sm" id="jurusan" name="jurusan" required>
-                                <option value="AK" {{ old('jurusan') == 'AK' ? 'selected' : '' }}>Analis Kimia</option>
-                                <option value="RPL" {{ old('jurusan') == 'RPL' ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
-                                <option value="TKJ" {{ old('jurusan') == 'TKJ' ? 'selected' : '' }}>Teknik Komputer dan Jaringan</option>
+                                <option value="AK">Analis Kimia</option>
+                                <option value="RPL">Rekayasa Perangkat Lunak</option>
+                                <option value="TKJ">Teknik Komputer dan Jaringan</option>
                             </select>
                         </div>
                         <div class="form-group form-row">
                             <div class="col">
                             <label class="form-label">Kelas</label>
                             <select class="form-control form-control-sm" id="kelas" name="kelas" required>
-                                <option value="1" {{ old('kelas') == '1' ? 'selected' : '' }}>1</option>
-                                <option value="2" {{ old('kelas') == '2' ? 'selected' : '' }}>2</option>
-                                <option value="3" {{ old('kelas') == '3' ? 'selected' : '' }}>3</option>
-                                <option value="4" {{ old('kelas') == '4' ? 'selected' : '' }}>4</option>
-                                <option value="5" {{ old('kelas') == '5' ? 'selected' : '' }}>5</option>
-                                <option value="6" {{ old('kelas') == '6' ? 'selected' : '' }}>6</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
                             </select>
                             </div>
                             <div class="col">
                                 <label class="form-label">Tahun</label>
-                                <input class="form-control form-control-sm" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ old() ? old('tahun') : date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
-                                <small class="form-text text-muted">*Terisi otomatis</small>
+                                <input class="form-control form-control-sm" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
                             </div>
                         </div>
                         <div class="text-right">
@@ -119,25 +113,17 @@
                         <tbody>
                             @forelse ($datasiswa as $siswa)
                             <tr>
-                                <td>{{ $siswa->nis }}</td>
-                                <td>{{ $siswa->nama }}</td>
-                                <td>{{ $siswa->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
-                                <td>{{ $siswa->jurusan }}</td>
-                                <td>{{ $siswa->kelas }}</td>
-                                <td>{{ $siswa->tahun }}</td>
-                                <td class="text-center">
-                                    <form class="d-inline" method="POST" action="{{ route('admin.edit.siswa') }}">
-                                        @csrf
-                                        <input type="hidden" name="nis" value="{{ $siswa->nis }}">
-                                        <button type="submit" class="btn btn-sm btn-outline-warning">Edit</button>
-                                    </form>
-                                    <form class="d-inline" method="POST" action="{{ route('admin.hapus.siswa') }}">
-                                        @csrf
-                                        <input type="hidden" name="nis" value="{{ $siswa->nis }}">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
+                                    <td>{{ $siswa->nis }}</td>
+                                    <td>{{ $siswa->nama }}</td>
+                                    <td>{{ $siswa->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                                    <td>{{ $siswa->jurusan }}</td>
+                                    <td>{{ $siswa->kelas }}</td>
+                                    <td>{{ $siswa->tahun }}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-outline-warning">Edit</a>
+                                        <a class="btn btn-sm btn-outline-danger">Hapus</a>
+                                    </td>
+                                </tr>
                             @empty
                                 <p>Data Siswa kosong!</p>
                             @endforelse

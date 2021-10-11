@@ -35,9 +35,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/logout', 'AdminLoginController@logout')->name('admin.logout');
     Route::get('/pengaturan', 'AdminController@pengaturan')->name('admin.pengaturan');
     Route::post('/pengaturan', 'AdminController@pengaturanSubmit')->name('admin.pengaturan.submit');
-    Route::get('/data/siswa', 'DataSiswaController@index')->name('admin.data.siswa');
-    Route::post('/data/siswa', 'DataSiswaController@tambah')->name('admin.tambah.siswa');
-    Route::post('/data/siswa/edit', 'DataSiswaController@edit')->name('admin.edit.siswa');
-    Route::post('/data/siswa/update', 'DataSiswaController@update')->name('admin.update.siswa');
-    Route::post('/data/siswa/hapus', 'DataSiswaController@hapus')->name('admin.hapus.siswa');
+    Route::get('/data/siswa', 'AdminController@dataSiswa')->name('admin.data.siswa');
+    Route::post('/data/siswa', 'AdminController@tambahSiswa')->name('admin.tambah.siswa');
 });

@@ -30,14 +30,25 @@ Route::prefix('siswa')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/', 'AdminController@index')->name('admin.home');
+
     Route::get('/login', 'AdminLoginController@loginForm')->name('admin.login');
     Route::post('/login', 'AdminLoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'AdminLoginController@logout')->name('admin.logout');
+
     Route::get('/pengaturan', 'AdminController@pengaturan')->name('admin.pengaturan');
     Route::post('/pengaturan', 'AdminController@pengaturanSubmit')->name('admin.pengaturan.submit');
+
     Route::get('/data/siswa', 'DataSiswaController@index')->name('admin.data.siswa');
-    Route::post('/data/siswa', 'DataSiswaController@tambah')->name('admin.tambah.siswa');
+    Route::post('/data/siswa', 'DataSiswaController@cari')->name('admin.cari.siswa');
+
+    Route::permanentRedirect('/data/siswa/tambah', '/admin/data/siswa');
+    Route::post('/data/siswa/tambah', 'DataSiswaController@tambah')->name('admin.tambah.siswa');
+    Route::permanentRedirect('/data/siswa/edit', '/admin/data/siswa');
     Route::post('/data/siswa/edit', 'DataSiswaController@edit')->name('admin.edit.siswa');
+    Route::permanentRedirect('/data/siswa/update', '/admin/data/siswa');
     Route::post('/data/siswa/update', 'DataSiswaController@update')->name('admin.update.siswa');
+    Route::permanentRedirect('/data/siswa/hapus', '/admin/data/siswa');
     Route::post('/data/siswa/hapus', 'DataSiswaController@hapus')->name('admin.hapus.siswa');
+    // Route::permanentRedirect('/data/siswa/cari', '/admin/data/siswa');
+    // Route::post('/data/siswa/cari', 'DataSiswaController@cari')->name('admin.cari.siswa');
 });

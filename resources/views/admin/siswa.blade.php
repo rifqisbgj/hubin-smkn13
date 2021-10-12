@@ -14,13 +14,15 @@
             @endif
             @if ($errors->any())
                 <div class="alert alert-warning mb-2" role="alert">
-                    {{ dd($errors) }}
+                    <div><strong>Gagal menambahkan data</strong></div>
+                    @error('nis') <div>NIS sudah terdaftar!</div> @enderror
+                    @error('nama') <div>Format nama tidak valid!</div> @enderror
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">{{ old() ? 'Edit Siswa' : 'Keterangan Siswa' }}</div>
+                <div class="card-header">{{ old() && !$errors->any() ? 'Edit Siswa' : 'Keterangan Siswa' }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ old() ? route('admin.update.siswa') : route('admin.tambah.siswa') }}">
+                    <form method="POST" action="{{ old() && !$errors->any() ? route('admin.update.siswa') : route('admin.tambah.siswa') }}">
                         @csrf
 
                         @if (old())
@@ -29,11 +31,11 @@
 
                         <div class="form-group">
                             <label class="form-label">Nomor Induk Siswa</label>
-                            <input class="form-control form-control-sm" type="number" name="nis" value="{{ old('nis') }}" autocomplete="off" required>
+                            <input class="form-control form-control-sm @error('nis') is-invalid @enderror" type="number" name="nis" value="{{ old('nis') }}" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Nama Siswa</label>
-                            <input class="form-control form-control-sm" name="nama" value="{{ old('nama') }}" autocomplete="off" required>
+                            <input class="form-control form-control-sm @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" pattern="[a-zA-Z ]+" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Jenis Kelamin</label>
@@ -71,7 +73,8 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <button type="reset" class="btn btn-primary">Reset</button>
+                            <button type="submit" class="btn btn-primary">{{ old() && !$errors->any() ? 'Edit' : 'Tambah' }}</button>
                         </div>
                     </form>
                 </div>
@@ -79,28 +82,35 @@
         </div>
         <div class="col">
             <div class="card">
-                <div class="card-body">
-                    <form class="container">
+                <div class="card-body px-2">
+                    <form class="container" method="POST" action="{{ route('admin.cari.siswa') }}">
+                        @csrf
                         <div class="row justify-content-md-center">
-                            <div class="col-5 p-0 pr-2">
-                                <input class="form-control form-control-sm" name="nama" placeholder="Nama">
+                            <div class="col-2 p-0 pr-1">
+                                <input class="form-control form-control-sm" type="number" name="nis" placeholder="NIS" value="{{ $nis ?? '' }}" autocomplete="off">
                             </div>
-                            <div class="col-3 p-0 pr-2">
+                            <div class="col-3 p-0 pr-1">
+                                <input class="form-control form-control-sm" name="nama" placeholder="Nama" value="{{ $nama ?? '' }}" autocomplete="off">
+                            </div>
+                            <div class="col-3 p-0 pr-1">
                                 <select class="form-control form-control-sm" name="jurusan">
                                     <option value="">Semua Jurusan</option>
-                                    <option value="AK">Analis Kimia</option>
-                                    <option value="RPL">Rekayasa Perangkat Lunak</option>
-                                    <option value="TKJ">Teknik Komputer Jaringan</option>
+                                    <option value="AK" {{ $jurusan ?? '' == 'AK' ? 'selected' : '' }}>Analis Kimia</option>
+                                    <option value="RPL" {{ $jurusan ?? '' == 'RPL' ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
+                                    <option value="TKJ" {{ $jurusan ?? '' == 'TKJ' ? 'selected' : '' }}>Teknik Komputer dan Jaringan</option>
                                 </select>
                             </div>
-                            <div class="col p-0 pr-2">
-                                <input class="form-control form-control-sm" type-"number" name="kelas" placeholder="Kelas">
+                            <div class="col p-0 pr-1">
+                                <input class="form-control form-control-sm" type-"number" name="kelas" value="{{ $kelas ?? '' }}" autocomplete="off" placeholder="Kelas">
                             </div>
-                            <div class="col p-0 pr-2">
-                                <input class="form-control form-control-sm" type="number" name="tahun" placeholder="Tahun">
+                            <div class="col p-0 pr-1">
+                                <input class="form-control form-control-sm" name="tahun" maxlength="4" pattern="[\d+]{4}" value="{{ $tahun ?? '' }}" autocomplete="off" placeholder="Tahun">
+                            </div>
+                            <div class="col p-0 pr-1">
+                                <button class="btn btn-sm btn-outline-success w-100" type="submit">Cari</button>
                             </div>
                             <div class="col p-0">
-                                <button class="btn btn-sm btn-outline-success" type="submit">Cari</button>
+                                <a class="btn btn-sm btn-outline-secondary w-100" href="{{ route('admin.data.siswa') }}">Ulang</a>
                             </div>
                         </div>
                     </form>
@@ -131,7 +141,7 @@
                                     <form class="d-inline" method="POST" action="{{ route('admin.edit.siswa') }}">
                                         @csrf
                                         <input type="hidden" name="nis" value="{{ $siswa->nis }}">
-                                        <button type="submit" class="btn btn-sm btn-outline-warning">Edit</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-info">Edit</button>
                                     </form>
                                     <form class="d-inline" method="POST" action="{{ route('admin.hapus.siswa') }}">
                                         @csrf
@@ -141,7 +151,13 @@
                                 </td>
                             </tr>
                             @empty
-                                <p>Data Siswa kosong!</p>
+                                <tr>
+                                    @if ($cari ?? '')
+                                        <th colspan="7">Data siswa tidak ditemukan!</th>
+                                    @else
+                                        <th colspan="7">Data siswa kosong!</th>
+                                    @endif
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>

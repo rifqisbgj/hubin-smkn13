@@ -22,6 +22,9 @@ class DataSiswaController extends Controller
 
     public function tambah(DataSiswa $request)
     {
+        /* NIS harus unik */
+        $this->validate($request, ['nis' => 'unique:App\Siswa,nis']);
+
         /* TODO: password random buat siswa baru */
         $affected = Siswa::insert([
             'nis' => $request->nis,

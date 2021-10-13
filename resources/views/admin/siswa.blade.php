@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@push('siswa-form')
+@push('script')
     <script src="{{ asset('js/siswaform.js') }}"></script>
 @endpush
 @section('content')

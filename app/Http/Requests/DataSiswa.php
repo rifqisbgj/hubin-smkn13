@@ -26,7 +26,7 @@ class DataSiswa extends FormRequest
     {
         $tahun = date('Y');
         return [
-            'nis' => 'required|integer|unique:App\Siswa,nis',
+            'nis' => 'required|integer',
             'nama' => 'required|regex:/^[\pL\s]+$/u',
             'jenis_kelamin' => [
                 'required',

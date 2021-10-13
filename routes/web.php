@@ -49,6 +49,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/data/siswa/update', 'DataSiswaController@update')->name('admin.update.siswa');
     Route::permanentRedirect('/data/siswa/hapus', '/admin/data/siswa');
     Route::post('/data/siswa/hapus', 'DataSiswaController@hapus')->name('admin.hapus.siswa');
-    // Route::permanentRedirect('/data/siswa/cari', '/admin/data/siswa');
-    // Route::post('/data/siswa/cari', 'DataSiswaController@cari')->name('admin.cari.siswa');
+
+    Route::get('/data/industri', 'DataIndustriController@index')->name('admin.data.industri');
+    Route::permanentRedirect('/data/industri/{id}', '/admin/data/industri');
+    Route::post('/data/industri/{id}', 'DataIndustriController@informasi')->name('admin.informasi.industri');
 });

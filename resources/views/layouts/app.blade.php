@@ -10,10 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/jquery-3.5.1.slim.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    @stack('siswa-form')
+    @stack('script')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -50,11 +50,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.home') }}">Home</a>
                                 </li>
-                                <!--
                                 <li class="nav-item">
-                                    <a class="nav-link" href="industri">Data Industri</a>
+                                    <a class="nav-link" href="{{ route('admin.data.industri') }}">Data Industri</a>
                                 </li>
-                                -->
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.data.siswa') }}">Data Siswa</a>
                                 </li>

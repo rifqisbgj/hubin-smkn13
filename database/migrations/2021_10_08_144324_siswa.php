@@ -14,7 +14,7 @@ class Siswa extends Migration
     public function up()
     {
         Schema::create('siswa', function (Blueprint $table) {
-            $table->integer('nis')->unsigned()->unique();
+            $table->unsignedInteger('nis')->unique();
             $table->string('password');
             $table->string('nama');
             $table->enum('jenis_kelamin', ['L', 'P']);

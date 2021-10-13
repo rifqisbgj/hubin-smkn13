@@ -12,12 +12,28 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('industri')->insert([
-            'nama' => 'PT. Fagma',
+            'nama' => 'PT. Farma',
+            'bidang' => 'Kimiawi',
+            'kontak' => 'farma@google.co.id',
+            'jurusan' => 'AK',
             'tahun' => 2021,
             'alamat' => 'Jl. AH. Nasution Bandung',
             'kuota' => 4,
             'pembimbing' => 'Junaedi',
             'nip_pembimbing' => '123',
+        ]);
+
+        DB::table('industri')->insert([
+            'nama' => 'PT. Tidak Sukses',
+            'bidang' => 'Listrik Elektrik',
+            'kontak' => '089994923324',
+            'jurusan' => 'RPL,TKJ',
+            'tahun' => 2021,
+            'alamat' => 'Jl. Soekarno Hatta',
+            'kuota' => 2,
+            'pembimbing' => 'Habibi',
+            'nip_pembimbing' => '231',
+            'status' => false,
         ]);
 
         DB::table('siswa')->insert([

@@ -29,7 +29,7 @@ class Industri extends Migration
             $table->boolean('status')->default(true);
 
             /* Data Pembimbing */
-            $table->string('pembimbing')->nullable();
+            $table->string('nama_pembimbing')->nullable();
             $table->string('nip_pembimbing')->nullable();
         });
     }

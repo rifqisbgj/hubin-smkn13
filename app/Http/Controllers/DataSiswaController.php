@@ -62,7 +62,7 @@ class DataSiswaController extends Controller
 
     public function update(DataSiswa $request)
     {
-        $affected = Siswa::where('nis', $request->old_nis)
+        Siswa::where('nis', $request->old_nis)
             ->update([
             'nis' => $request->nis,
             'nama' => $request->nama,

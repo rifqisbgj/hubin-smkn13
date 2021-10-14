@@ -50,4 +50,33 @@ class DataIndustriController extends Controller
 
         return back()->with('status', ['success', 'Sukses menambahkan industri']);
     }
+
+    public function hapus(Request $request)
+    {
+        $industri = Industri::find($request->id);
+        $industri->delete();
+
+        // Perbarui semua id industri, atau biarkan?
+
+        return back()->with('status', ['danger', "Sukses menghapus {$industri->nama}"]);
+    }
+
+    public function update(DataIndustri $request)
+    {
+        // Mengubah array jurusan menjadi string
+        $jurusan = implode(',', $request->jurusan);
+
+        Industri::where('id', $request->id)
+            ->update([
+            'nama' => $request->nama,
+            'bidang' => $request->bidang,
+            'kontak' => $request->kontak,
+            'jurusan' => $jurusan,
+            'tahun' => $request->tahun,
+            'alamat' => $request->alamat,
+            'kuota' => $request->kuota,
+            ]);
+
+        return back()->with('status', ['success', "Sukses mengedit {$request->nama}"]);
+    }
 }

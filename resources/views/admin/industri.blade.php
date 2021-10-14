@@ -6,7 +6,7 @@
 @section('content')
 <div class="modal" id="industriModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered my-3" role="document">
-        <form class="modal-content" id="editIndustri" method="POST" action="{{ '' }}">
+        <form class="modal-content" id="editIndustri" method="POST" action="{{ route('admin.update.industri') }}">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -14,7 +14,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input id="industriId" type="hidden">
+                @csrf
+                <input id="industriId" name="id" type="hidden">
                 <div class="modal-text pb-2" id="industriPengaju"></div>
                 <div class="form-group">
                     <label class="form-label">Nama Industri</label>
@@ -61,9 +62,16 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" id="editIndustriSubmit" class="btn btn-primary">Ubah Perubahan</button>
+            <div class="modal-footer container">
+                <div class="row w-100">
+                    <div class="col-auto p-0 order-12">
+                        <button tabindex="2" class="btn btn-secondary" type="button" data-dismiss="modal">Tutup</button>
+                        <button tabindex="1" class="btn btn-primary" type="submit" id="editIndustriSubmit">Ubah Perubahan</button>
+                    </div>
+                    <div class="col-auto mr-auto p-0 order-1">
+                        <button tabindex="3" class="btn btn-danger" type="submit" formaction="{{ route('admin.hapus.industri') }}">Hapus</button>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -180,7 +188,7 @@
                         <tbody>
                             @forelse ($dataindustri as $industri)
                                 <tr class="{{ $industri->status ? '' : 'bg-warning' }}" role="button" data-toggle="modal" data-target="#exampleModal" data-id="{{ $industri->id }}">
-                                    <td>{{ $industri->id }}</td>
+                                    <td>{{ $loop->index+1 }}</td>
                                     <td>{{ $industri->nama }}</td>
                                     <td>{{ $industri->bidang }}</td>
                                     <td>{{ $industri->jurusan }}</td>

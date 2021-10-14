@@ -53,6 +53,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/data/industri', 'DataIndustriController@index')->name('admin.data.industri');
     Route::permanentRedirect('/data/industri/{id}', '/admin/data/industri')->where('id', '[0-9]+');
     Route::post('/data/industri/{id}', 'DataIndustriController@informasi')->where('id', '[0-9]+')->name('admin.informasi.industri');
+
     Route::permanentRedirect('/data/industri/tambah', '/admin/data/industri');
     Route::post('/data/industri/tambah', 'DataIndustriController@tambah')->name('admin.tambah.industri');
+    Route::permanentRedirect('/data/industri/hapus', '/admin/data/industri');
+    Route::post('/data/industri/hapus', 'DataIndustriController@hapus')->name('admin.hapus.industri');
+    Route::permanentRedirect('/data/industri/update', '/admin/data/industri');
+    Route::post('/data/industri/update', 'DataIndustriController@update')->name('admin.update.industri');
 });

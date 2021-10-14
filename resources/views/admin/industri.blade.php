@@ -150,17 +150,34 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <form class="container" method="POST" action="{{ 'admin.cari.indsutri' }}">
+                    <form class="container" method="POST" action="{{ route('admin.cari.industri') }}">
                         @csrf
                         <div class="row justify-content-md-center">
                             <div class="col-3 p-0 pr-1">
-                                <input class="form-control form-control-sm" name="nama" placeholder="Nama" autocomplete="off">
+                                <input class="form-control form-control-sm" name="nama" placeholder="Nama" value="{{ $nama ?? '' }}" autocomplete="off">
                             </div>
                             <div class="col-3 p-0 pr-1">
-                                <input class="form-control form-control-sm" name="alamat" placeholder="Alamat" autocomplete="off">
+                                <input class="form-control form-control-sm" name="alamat" placeholder="Alamat" value="{{ $alamat ?? '' }}" autocomplete="off">
+                            </div>
+                            <div class="col-auto my-auto px-1 text-center">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="jurusan[]" value="AK" {{ in_array('AK', $jurusan ?? []) ? 'checked' : '' }}>AK
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="jurusan[]" value="RPL" {{ in_array('RPL', $jurusan ?? []) ? 'checked' : '' }}>RPL
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="jurusan[]" value="TKJ" {{ in_array('TKJ', $jurusan ?? []) ? 'checked' : '' }}>TKJ
+                                    </label>
+                                </div>
                             </div>
                             <div class="col p-0 pr-1">
-                                <input class="form-control form-control-sm" type="number" name="tahun" placeholder="Tahun" autocomplete="off">
+                                <input class="form-control form-control-sm" type="number" name="tahun" placeholder="Tahun" value="{{ $tahun ?? '' }}">
                             </div>
                             <div class="col p-0 pr-1">
                                 <button class="btn btn-sm btn-outline-success w-100" type="submit">Cari</button>

@@ -68,15 +68,40 @@ class DataIndustriController extends Controller
 
         Industri::where('id', $request->id)
             ->update([
-            'nama' => $request->nama,
-            'bidang' => $request->bidang,
-            'kontak' => $request->kontak,
-            'jurusan' => $jurusan,
-            'tahun' => $request->tahun,
-            'alamat' => $request->alamat,
-            'kuota' => $request->kuota,
+                'nama' => $request->nama,
+                'bidang' => $request->bidang,
+                'kontak' => $request->kontak,
+                'jurusan' => $jurusan,
+                'tahun' => $request->tahun,
+                'alamat' => $request->alamat,
+                'kuota' => $request->kuota,
             ]);
 
         return back()->with('status', ['success', "Sukses mengedit {$request->nama}"]);
+    }
+
+    public function cari(Request $request)
+    {
+        $dataindustri = Industri::query();
+
+        /* TODO: Ganti percabangan if? */
+        if ($request->nama) $dataindustri = $dataindustri->where('nama', 'like', "%$request->nama%");
+        if ($request->alamat) $dataindustri = $dataindustri->where('alamat', 'like', "%$request->alamat%");
+        if ($request->tahun) $dataindustri = $dataindustri->whereYear('tahun', $request->tahun);
+
+        $dataindustri = $dataindustri->get();
+
+        /* TODO: Optimisasi pengecekan jurusan? */
+        if ($request->jurusan) {
+            $dataindustri = $dataindustri->filter(function($industri) use ($request) {
+                $jurusan = explode(',', $industri->jurusan);
+                return array_intersect($jurusan, $request->jurusan);
+            });
+        }
+
+        return view('admin.industri')->with([
+            'cari' => true,
+            'dataindustri' => $dataindustri,
+        ] + $request->all());
     }
 }

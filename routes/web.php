@@ -51,6 +51,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/data/siswa/hapus', 'DataSiswaController@hapus')->name('admin.hapus.siswa');
 
     Route::get('/data/industri', 'DataIndustriController@index')->name('admin.data.industri');
+    Route::post('/data/industri', 'DataIndustriController@cari')->name('admin.cari.industri');
     Route::permanentRedirect('/data/industri/{id}', '/admin/data/industri')->where('id', '[0-9]+');
     Route::post('/data/industri/{id}', 'DataIndustriController@informasi')->where('id', '[0-9]+')->name('admin.informasi.industri');
 

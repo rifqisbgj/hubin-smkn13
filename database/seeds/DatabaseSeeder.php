@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             'kuota' => 2,
             'pembimbing' => 'Habibi',
             'nip_pembimbing' => '231',
+            'nis_pengaju' => 123,
             'status' => false,
         ]);
 

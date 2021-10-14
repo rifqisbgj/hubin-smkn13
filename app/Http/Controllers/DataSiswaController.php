@@ -26,7 +26,7 @@ class DataSiswaController extends Controller
         $this->validate($request, ['nis' => 'unique:App\Siswa,nis']);
 
         /* TODO: password random buat siswa baru */
-        $affected = Siswa::insert([
+       Siswa::insert([
             'nis' => $request->nis,
             'password' => Hash::make('password'),
             'nama' => $request->nama,
@@ -36,9 +36,7 @@ class DataSiswaController extends Controller
             'tahun' => $request->tahun,
         ]);
 
-        if ($affected) {
-            return back()->with('status', ['success', 'Sukses menambahkan siswa']);
-        }
+        return back()->with('status', ['success', 'Sukses menambahkan siswa']);
     }
 
     public function hapus(Request $request)

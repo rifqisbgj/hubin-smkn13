@@ -16,8 +16,8 @@ class Industri extends Migration
         Schema::create('industri', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
-            $table->string('bidang');
-            $table->string('kontak');
+            $table->string('bidang')->nullable();
+            $table->string('kontak')->nullable();
             $table->string('jurusan');
             $table->year('tahun');
             $table->text('alamat');
@@ -25,12 +25,12 @@ class Industri extends Migration
 
             /* Pengajuan */
             /* TODO: Foreign key nis siswa? */
-            $table->unsignedInteger('nis')->nullable();
+            $table->unsignedInteger('nis_pengaju')->nullable();
             $table->boolean('status')->default(true);
 
             /* Data Pembimbing */
-            $table->string('pembimbing');
-            $table->string('nip_pembimbing');
+            $table->string('pembimbing')->nullable();
+            $table->string('nip_pembimbing')->nullable();
         });
     }
 

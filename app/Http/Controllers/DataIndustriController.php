@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\DataIndustri;
 use App\Industri;
+use App\Siswa;
 
 class DataIndustriController extends Controller
 {
@@ -21,6 +23,31 @@ class DataIndustriController extends Controller
     public function informasi($id)
     {
         $dataindustri = Industri::find($id);
-        return response()->json($dataindustri);
+        if ($dataindustri->nis_pengaju) {
+            $pengaju = Siswa::find($dataindustri->nis_pengaju);
+        }
+        return response()->json([
+            'industri' => $dataindustri, 
+            'pengaju' => $pengaju ?? '',
+        ]);
+    }
+
+    public function tambah(DataIndustri $request)
+    {
+        // Mengubah array jurusan menjadi string
+        $jurusan = implode(',', $request->jurusan);
+
+        Industri::insert([
+            'nama' => $request->nama,
+            'bidang' => $request->bidang,
+            'kontak' => $request->kontak,
+            'jurusan' => $jurusan,
+            'tahun' => $request->tahun,
+            'alamat' => $request->alamat,
+            'kuota' => $request->kuota,
+            /* Data pengajuan dan pembimbing tidak perlu dimasukkan */
+        ]);
+
+        return back()->with('status', ['success', 'Sukses menambahkan industri']);
     }
 }

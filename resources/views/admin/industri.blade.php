@@ -5,8 +5,8 @@
 @endpush
 @section('content')
 <div class="modal" id="industriModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form class="modal-content" method="POST" action="{{ '' }}">
+    <div class="modal-dialog modal-dialog-centered my-3" role="document">
+        <form class="modal-content" id="editIndustri" method="POST" action="{{ '' }}">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -15,17 +15,18 @@
             </div>
             <div class="modal-body">
                 <input id="industriId" type="hidden">
+                <div class="modal-text pb-2" id="industriPengaju"></div>
                 <div class="form-group">
                     <label class="form-label">Nama Industri</label>
-                    <input class="form-control form-control-sm" id="industriNama" name="nama" pattern="[a-zA-Z ]+" autocomplete="off" required>
+                    <input class="form-control form-control-sm" id="industriNama" name="nama" autocomplete="off" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Bidang</label>
-                    <input class="form-control form-control-sm" id="industriBidang" name="bidang">
+                    <input class="form-control form-control-sm" id="industriBidang" name="bidang" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Kontak</label>
-                    <input class="form-control form-control-sm" id="industriKontak" name="kontak">
+                    <input class="form-control form-control-sm" id="industriKontak" name="kontak" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Alamat</label>
@@ -34,19 +35,22 @@
                 <div class="form-group">
                     <label class="form-label">Jurusan</label><br />
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="AK">
-                        <label class="form-check-label">AK</label>
+                        <label class="form-check-label">
+                            <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="AK">AK
+                        </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="RPL">
-                        <label class="form-check-label">RPL</label>
+                        <label class="form-check-label">
+                            <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="RPL">RPL
+                        </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="TKJ">
-                        <label class="form-check-label">TKJ</label>
+                        <label class="form-check-label">
+                            <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="TKJ">TKJ
+                        </label>
                     </div>
                 </div>
-                <div class="form-group form-row">
+                <div class="form-group form-row mb-0">
                     <div class="col">
                         <label class="form-label">Kuota</label>
                         <input class="form-control form-control-sm" id="industriKuota" type="number" name="kuota" min="0" max="10" value="4">
@@ -59,7 +63,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Ubah Perubahan</button>
+                <button type="submit" id="editIndustriSubmit" class="btn btn-primary">Ubah Perubahan</button>
             </div>
         </form>
     </div>
@@ -67,41 +71,55 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-3">
+            @if (session('status'))
+                <div class="alert alert-{{ session('status')[0] }} mb-2" role="alert">
+                    {{ session('status')[1] }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-warning mb-2" role="alert">
+                    <div><strong>Gagal menambahkan data</strong></div>
+                    <div>{{ $errors }}</div>
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">Data Industri</div>
                 <div class="card-body">
-                    <form method="POST" action="submit">
+                    <form id="tambahIndustri" method="POST" action="{{ route('admin.tambah.industri') }}">
                         @csrf
 
                         <div class="form-group">
                             <label class="form-label">Nama Industri</label>
-                            <input class="form-control form-control-sm" name="nama" pattern="[a-zA-Z ]+" autocomplete="off" required>
+                            <input class="form-control form-control-sm" name="nama" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Bidang</label>
-                            <input class="form-control form-control-sm" name="bidang">
+                            <input class="form-control form-control-sm" name="bidang" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Kontak</label>
-                            <input class="form-control form-control-sm" name="kontak">
+                            <input class="form-control form-control-sm" name="kontak" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Alamat</label>
-                            <textarea class="form-control form-control-sm" name="alamat" required></textarea>
+                            <textarea class="form-control form-control-sm" name="alamat" autocomplete="off" required></textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Jurusan</label><br />
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="jurusan[]" value="AK">
-                                <label class="form-check-label">AK</label>
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="jurusan[]" value="AK">AK
+                                </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="jurusan[]" value="RPL">
-                                <label class="form-check-label">RPL</label>
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="jurusan[]" value="RPL">RPL
+                                </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="jurusan[]" value="TKJ">
-                                <label class="form-check-label">TKJ</label>
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="jurusan[]" value="TKJ">TKJ
+                                </label>
                             </div>
                         </div>
                         <div class="form-group form-row">
@@ -115,7 +133,7 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary">{{ old() && !$errors->any() ? 'Edit' : 'Tambah' }}</button>
+                            <button type="submit" id="tambahIndustriSubmit" class="btn btn-primary">Tambah</button>
                         </div>
                     </form>
                 </div>

@@ -28,8 +28,8 @@ class DataIndustri extends FormRequest
         return [
             // 'id' => 'required',
             'nama' => 'required',
-            'bidang' => '',
-            'kontak' => '',
+            'bidang' => 'nullable',
+            'kontak' => 'nullable',
             'jurusan' => 'required|array|min:1',
             'jurusan.*' => [
                 'required',
@@ -40,9 +40,9 @@ class DataIndustri extends FormRequest
             'alamat' => 'required',
             'kuota' => 'required|integer|min:0',
             'nis_pengaju' => 'required_if:status,==,false|integer',
-            'status' => 'boolean',
-            'pembimbing' => 'required_with:nip_pembimbing|string',
-            'nip_pembimbing' => 'required_with:pembimbing|integer',
+            // 'status' => 'boolean',
+            'nama_pembimbing' => 'nullable|',
+            'nip_pembimbing' => 'nullable|integer',
         ];
     }
 }

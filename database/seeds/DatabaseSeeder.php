@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'Jl. AH. Nasution Bandung',
             'kuota' => 4,
             'nama_pembimbing' => 'Junaedi',
-            'nip_pembimbing' => '123',
+            'nip_pembimbing' => 123,
         ]);
 
         DB::table('industri')->insert([

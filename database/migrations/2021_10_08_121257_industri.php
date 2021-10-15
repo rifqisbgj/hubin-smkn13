@@ -30,7 +30,7 @@ class Industri extends Migration
 
             /* Data Pembimbing */
             $table->string('nama_pembimbing')->nullable();
-            $table->string('nip_pembimbing')->nullable();
+            $table->unsignedBigInteger('nip_pembimbing')->nullable();
         });
     }
 

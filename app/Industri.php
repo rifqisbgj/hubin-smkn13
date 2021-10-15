@@ -12,14 +12,15 @@ class Industri extends Model
 
     protected $fillable = [
         'nama',
+        'bidang',
+        'kontak',
+        'jurusan',
         'tahun',
         'alamat',
         'kuota',
-        'pembimbing',
+        'nis_pengaju',
+        'status',
+        'nama_pembimbing',
         'nip_pembimbing',
-    ];
-
-    protected $hidden = [
-        'pembimbing', 'nip_pembimbing',
     ];
 }

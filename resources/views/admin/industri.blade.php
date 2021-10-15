@@ -4,61 +4,85 @@
     <script src="{{ asset('js/dataindustri.js') }}"></script>
 @endpush
 @section('content')
-<div class="modal" id="industriModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered my-3" role="document">
+<div class="modal overflow-hidden" id="industriModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <form class="modal-content" id="editIndustri" method="POST" action="{{ route('admin.industri.update') }}">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <div class="modal-body">
-                @csrf
-                <input id="industriId" name="id" type="hidden">
-                <div class="modal-text pb-2" id="industriPengaju"></div>
-                <div class="form-group">
-                    <label class="form-label">Nama Industri</label>
-                    <input class="form-control form-control-sm" id="industriNama" name="nama" autocomplete="off" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Bidang</label>
-                    <input class="form-control form-control-sm" id="industriBidang" name="bidang" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Kontak</label>
-                    <input class="form-control form-control-sm" id="industriKontak" name="kontak" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Alamat</label>
-                    <textarea class="form-control form-control-sm" id="industriAlamat" name="alamat" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Jurusan</label><br />
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="AK">AK
-                        </label>
+                <div class="card-group">
+                    <div class="card">
+                        <div class="card-header">Data Industri</div>
+                        <div class="card-body">
+                            @csrf
+                            <input id="industriId" name="id" type="hidden">
+                            <div class="form-group">
+                                <label class="form-label">Nama Industri</label>
+                                <input class="form-control form-control-sm" id="industriNama" name="nama" autocomplete="off" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Bidang</label>
+                                <input class="form-control form-control-sm" id="industriBidang" name="bidang" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Kontak</label>
+                                <input class="form-control form-control-sm" id="industriKontak" name="kontak" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Alamat</label>
+                                <textarea class="form-control form-control-sm" id="industriAlamat" name="alamat" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Jurusan</label><br />
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="AK">AK
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="RPL">RPL
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="TKJ">TKJ
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group form-row mb-0">
+                                <div class="col">
+                                    <label class="form-label">Kuota</label>
+                                    <input class="form-control form-control-sm" id="industriKuota" type="number" name="kuota" min="1" value="4">
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Tahun</label>
+                                    <input class="form-control form-control-sm" id="industriTahun" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ old() ? old('tahun') : date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="RPL">RPL
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input industriJurusan" type="checkbox" name="jurusan[]" value="TKJ">TKJ
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group form-row mb-0">
-                    <div class="col">
-                        <label class="form-label">Kuota</label>
-                        <input class="form-control form-control-sm" id="industriKuota" type="number" name="kuota" min="0" max="10" value="4">
-                    </div>
-                    <div class="col">
-                        <label class="form-label">Tahun</label>
-                        <input class="form-control form-control-sm" id="industriTahun" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ old() ? old('tahun') : date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
+                    <div class="card">
+                        <div class="card-header">Data Pengaju dan Pembimbing</div>
+                        <div class="card-body">
+                            <input id="industriPengaju" type="hidden" name="nis_pengaju">
+                            <div class="pb-2" id="industriPengajuTeks"></div>
+                            <div class="pb-2">
+                                <small class="text-muted" id="industriStatus"></small>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                    <input class="custom-control-input" id="industriTerimaAjuan" type="checkbox" name="status">
+                                <label class="custom-control-label" for="industriTerimaAjuan">Terima Ajuan Industri
+                                </label>
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <label class="form-label">Nama Pembimbing</label>
+                                <input class="form-control form-control-sm" id="industriNamaPem" name="nama_pembimbing" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">NIP Pembimbing</label>
+                                <input class="form-control form-control-sm" id="industriNIPPem" type="number" name="nip_pembimbing" autocomplete="off">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,7 +93,7 @@
                         <button tabindex="1" class="btn btn-primary" type="submit" id="editIndustriSubmit">Ubah Perubahan</button>
                     </div>
                     <div class="col-auto mr-auto p-0 order-1">
-                        <button tabindex="3" class="btn btn-danger" type="submit" formaction="{{ route('admin.industri.hapus') }}">Hapus</button>
+                        <button tabindex="4" class="btn btn-danger" type="submit" formaction="{{ route('admin.industri.hapus') }}">Hapus</button>
                     </div>
                 </div>
             </div>
@@ -133,7 +157,7 @@
                         <div class="form-group form-row">
                             <div class="col">
                                 <label class="form-label">Kuota</label>
-                                <input class="form-control form-control-sm" type="number" name="kuota" min="0" max="10" value="4">
+                                <input class="form-control form-control-sm" type="number" name="kuota" min="1" value="4">
                             </div>
                             <div class="col">
                                 <label class="form-label">Tahun</label>
@@ -195,11 +219,11 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Bidang</th>
-                                <th>Jurusan</th>
-                                <th>Kontak</th>
+                                <th class="text-center">Jurusan</th>
                                 <th>Alamat</th>
-                                <th>Kuota</th>
-                                <th>Tahun</th>
+                                <th>Kontak</th>
+                                <th class="text-center">Kuota</th>
+                                <th class="text-center">Tahun</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -208,11 +232,15 @@
                                     <td>{{ $loop->index+1 }}</td>
                                     <td>{{ $industri->nama }}</td>
                                     <td>{{ $industri->bidang }}</td>
-                                    <td>{{ $industri->jurusan }}</td>
-                                    <td>{{ $industri->kontak }}</td>
+                                    <td class="text-center">
+                                        {!! strpos($industri->jurusan, 'AK') !== false ? '<span class="badge badge-info">AK</span>' : '' !!}
+                                        {!! strpos($industri->jurusan, 'RPL') !== false ? '<span class="badge badge-secondary">RPL</span>' : '' !!}
+                                        {!! strpos($industri->jurusan, 'TKJ') !== false ? '<span class="badge badge-dark">TKJ</span>' : '' !!}
+                                    </td>
                                     <td>{{ $industri->alamat }}</td>
-                                    <td>{{ $industri->kuota }}</td>
-                                    <td>{{ $industri->tahun }}</td>
+                                    <td>{{ $industri->kontak }}</td>
+                                    <td class="text-center">{{ $industri->kuota }}</td>
+                                    <td class="text-center">{{ $industri->tahun }}</td>
                                 </tr>
                             @empty
                                 <tr>

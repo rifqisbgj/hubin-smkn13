@@ -27,20 +27,28 @@ $(document).ready(function () {
 			});
 
 			$('#industriModal').modal('show');
-			$('#modalTitle').html('Informasi ' + data.industri.nama)
 			$('#industriId').val(data.industri.id);
 			$('#industriNama').val(data.industri.nama);
 			$('#industriBidang').val(data.industri.bidang);
 			$('#industriKontak').val(data.industri.kontak);
 			$('#industriAlamat').val(data.industri.alamat);
-			// $('#industriJurusan').val(data.industri.jurusan);
 			$('#industriKuota').val(data.industri.kuota);
 			$('#industriTahun').val(data.industri.tahun);
+			$('#industriNamaPem').val(data.industri.nama_pembimbing);
+			$('#industriNIPPem').val(data.industri.nip_pembimbing);
 
+			// Jika ada data pengaju maka industri adalah ajuan
 			if (data.pengaju) {
-				$('#industriPengaju').html(`Diajukan oleh ${data.pengaju.nama} (${data.pengaju.nis})`);
+				$('#industriPengaju').val(data.industri.nis_pengaju);
+				$('#industriPengajuTeks').html(`Diajukan oleh ${data.pengaju.nama} (${data.pengaju.nis})`);
+				$('#industriStatus').html('Gunakan input dibawah untuk mengalihkan status industri');
+				$('#industriTerimaAjuan').prop('disabled', false);
+				$('#industriTerimaAjuan').prop('checked', data.industri.status);
 			} else {
-				$('#industriPengaju').html('');
+				$('#industriPengaju').html('Industri ini dari sekolah');
+				$('#industriStatus').html('');
+				$('#industriTerimaAjuan').prop('disabled', true);
+				$('#industriTerimaAjuan').prop('checked', true);
 			}
 
 			$('#industriNama').focus();

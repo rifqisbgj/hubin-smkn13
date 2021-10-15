@@ -41,7 +41,7 @@ class DataIndustriController extends Controller
                 'jurusan' => $jurusan,
             ] + $request->except('_token', 'jurusan'));
 
-        return back()->with('status', ['success', 'Sukses menambahkan industri']);
+        return back()->with('status', ['success', "Sukses menambahkan industri {$request->nama}"]);
     }
 
     public function hapus(Request $request)
@@ -62,7 +62,14 @@ class DataIndustriController extends Controller
         $industri = Industri::where('id', $request->id);
         $industri->update([
             'jurusan' => $jurusan,
-        ] + $request->except('_token', 'jurusan'));
+        ] + $request->except('_token', 'jurusan', 'status'));
+
+        // Jika ada nis_pengaju maka industri adalah ajuan dan status dapat berubah
+        if ($request->nis_pengaju) {
+            $industri->update([
+                'status' => $request->status ? true : false
+            ]);
+        }
 
         return back()->with('status', ['success', "Sukses mengedit {$request->nama}"]);
     }

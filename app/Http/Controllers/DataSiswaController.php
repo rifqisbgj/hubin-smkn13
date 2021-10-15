@@ -27,14 +27,8 @@ class DataSiswaController extends Controller
 
         /* TODO: password random buat siswa baru */
        Siswa::insert([
-            'nis' => $request->nis,
             'password' => Hash::make('password'),
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'jurusan' => $request->jurusan,
-            'kelas' => $request->kelas,
-            'tahun' => $request->tahun,
-        ]);
+       ] + $request->except('_token', 'password'));
 
         return back()->with('status', ['success', 'Sukses menambahkan siswa']);
     }
@@ -50,29 +44,21 @@ class DataSiswaController extends Controller
     public function edit(Request $request)
     {
         $siswa = Siswa::find($request->nis);
-        return back()->withInput([
-            'nis' => $siswa->nis,
-            'nama' => $siswa->nama,
-            'jenis_kelamin' => $siswa->jenis_kelamin,
-            'jurusan' => $siswa->jurusan,
-            'kelas' => $siswa->kelas,
-            'tahun' => $siswa->tahun,
-        ])->with('status', ['warning', "Mengedit data siswa {$siswa->nis}"]);
+        return back()->withInput($siswa->attributesToArray())
+                     ->with('status', ['warning', "Mengedit data siswa {$siswa->nama}"]);
     }
 
     public function update(DataSiswa $request)
     {
-        Siswa::where('nis', $request->old_nis)
-            ->update([
-            'nis' => $request->nis,
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'jurusan' => $request->jurusan,
-            'kelas' => $request->kelas,
-            'tahun' => $request->tahun,
-            ]);
+        // Jika NIS awal dan akhir tidak sama, maka cek jika ada duplikat
+        if (!($request->nis === $request->old_nis)) {
+            $this->validate($request, ['nis' => 'unique:App\Siswa,nis']);
+        }
 
-        return back()->with('status', ['success', "Sukses mengedit siswa {$request->nis}"]);
+        Siswa::where('nis', $request->old_nis)
+            ->update($request->except('_token', 'old_nis'));
+
+        return back()->with('status', ['success', "Sukses mengedit siswa {$request->nama}"]);
     }
 
     /* TODO: ganti percabangan if jadi lebih rapih */

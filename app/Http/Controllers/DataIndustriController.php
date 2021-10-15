@@ -38,15 +38,8 @@ class DataIndustriController extends Controller
         $jurusan = implode(',', $request->jurusan);
 
         Industri::insert([
-            'nama' => $request->nama,
-            'bidang' => $request->bidang,
-            'kontak' => $request->kontak,
-            'jurusan' => $jurusan,
-            'tahun' => $request->tahun,
-            'alamat' => $request->alamat,
-            'kuota' => $request->kuota,
-            /* Data pengajuan dan pembimbing tidak perlu dimasukkan */
-        ]);
+                'jurusan' => $jurusan,
+            ] + $request->except('_token', 'jurusan'));
 
         return back()->with('status', ['success', 'Sukses menambahkan industri']);
     }
@@ -66,16 +59,10 @@ class DataIndustriController extends Controller
         // Mengubah array jurusan menjadi string
         $jurusan = implode(',', $request->jurusan);
 
-        Industri::where('id', $request->id)
-            ->update([
-                'nama' => $request->nama,
-                'bidang' => $request->bidang,
-                'kontak' => $request->kontak,
-                'jurusan' => $jurusan,
-                'tahun' => $request->tahun,
-                'alamat' => $request->alamat,
-                'kuota' => $request->kuota,
-            ]);
+        $industri = Industri::where('id', $request->id);
+        $industri->update([
+            'jurusan' => $jurusan,
+        ] + $request->except('_token', 'jurusan'));
 
         return back()->with('status', ['success', "Sukses mengedit {$request->nama}"]);
     }

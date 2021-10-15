@@ -6,7 +6,7 @@ $(document).ready(function() {
 	// Cek jurusan setelah form tampil
 	cekJurusan()
 	// Cek jurusan ketika jurusan terganti
-	$('#jurusan').change(cekJurusan());
+	$('#jurusan').change(cekJurusan);
 });
 
 function cekJurusan() {
@@ -24,5 +24,5 @@ function cekJurusan() {
 		} else {
 			$(pilihan).prop('hidden', true);
 		}
-	}
+	});
 }

@@ -26,7 +26,6 @@ class DataIndustri extends FormRequest
     {
         $tahun = date('Y');
         return [
-            // 'id' => 'required',
             'nama' => 'required',
             'bidang' => 'nullable',
             'kontak' => 'nullable',
@@ -39,9 +38,8 @@ class DataIndustri extends FormRequest
             'tahun' => "required|integer|gte:2020|lte:{$tahun}",
             'alamat' => 'required',
             'kuota' => 'required|integer|min:0',
-            'nis_pengaju' => 'required_if:status,==,false|integer',
-            // 'status' => 'boolean',
-            'nama_pembimbing' => 'nullable|',
+            'nis_pengaju' => 'nullable|required_with:status|integer',
+            'nama_pembimbing' => 'nullable',
             'nip_pembimbing' => 'nullable|integer',
         ];
     }

@@ -45,7 +45,8 @@ $(document).ready(function () {
 				$('#industriTerimaAjuan').prop('disabled', false);
 				$('#industriTerimaAjuan').prop('checked', data.industri.status);
 			} else {
-				$('#industriPengaju').html('Industri ini dari sekolah');
+				$('#industriPengaju').val('');
+				$('#industriPengajuTeks').html('Industri ini dari sekolah');
 				$('#industriStatus').html('');
 				$('#industriTerimaAjuan').prop('disabled', true);
 				$('#industriTerimaAjuan').prop('checked', true);
@@ -61,7 +62,7 @@ $(document).ready(function () {
 	 * TODO: Highlight input jurusan dan ganti alert
 	 */
 	$('#tambahIndustriSubmit').click(function () {
-		if (!$('#tambahIndustri input[type=checkbox]').filter(':checked').length) {
+		if (!$('#tambahIndustri input[name="jurusan[]"]').filter(':checked').length) {
 			$('#tambahIndustri .form-group').eq(4).css('border', 'red 1px solid');
 			alert("Harap isi minimal 1 jurusan!");
 			return false;
@@ -69,8 +70,7 @@ $(document).ready(function () {
 	});
 
 	$('#editIndustriSubmit').click(function () {
-		if (!$('#editIndustri input[type=checkbox]').filter(':checked').length) {
-			// $('#editIndustri .form-group').eq(4).css('border', 'red 1px solid');
+		if (!$('#editIndustri input[name="jurusan[]"]').filter(':checked').length) {
 			alert("Harap isi minimal 1 jurusan!");
 			return false;
 		}

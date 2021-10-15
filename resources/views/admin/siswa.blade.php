@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-header">{{ old() && !$errors->any() ? 'Edit Siswa' : 'Keterangan Siswa' }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ old() && !$errors->any() ? route('admin.update.siswa') : route('admin.tambah.siswa') }}">
+                    <form method="POST" action="{{ old() && !$errors->any() ? route('admin.siswa.update') : route('admin.siswa.tambah') }}">
                         @csrf
 
                         @if (old())
@@ -83,7 +83,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body px-2">
-                    <form class="container" method="POST" action="{{ route('admin.cari.siswa') }}">
+                    <form class="container" method="POST" action="{{ route('admin.siswa.cari') }}">
                         @csrf
                         <div class="row justify-content-md-center">
                             <div class="col-2 p-0 pr-1">
@@ -110,7 +110,7 @@
                                 <button class="btn btn-sm btn-outline-success w-100" type="submit">Cari</button>
                             </div>
                             <div class="col p-0">
-                                <a class="btn btn-sm btn-outline-secondary w-100" href="{{ route('admin.data.siswa') }}">Ulang</a>
+                                <a class="btn btn-sm btn-outline-secondary w-100" href="{{ route('admin.siswa.data') }}">Ulang</a>
                             </div>
                         </div>
                     </form>
@@ -138,12 +138,12 @@
                                 <td>{{ $siswa->kelas }}</td>
                                 <td>{{ $siswa->tahun }}</td>
                                 <td class="text-center">
-                                    <form class="d-inline" method="POST" action="{{ route('admin.edit.siswa') }}">
+                                    <form class="d-inline" method="POST" action="{{ route('admin.siswa.edit') }}">
                                         @csrf
                                         <input type="hidden" name="nis" value="{{ $siswa->nis }}">
                                         <button type="submit" class="btn btn-sm btn-outline-info">Edit</button>
                                     </form>
-                                    <form class="d-inline" method="POST" action="{{ route('admin.hapus.siswa') }}">
+                                    <form class="d-inline" method="POST" action="{{ route('admin.siswa.hapus') }}">
                                         @csrf
                                         <input type="hidden" name="nis" value="{{ $siswa->nis }}">
                                         <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>

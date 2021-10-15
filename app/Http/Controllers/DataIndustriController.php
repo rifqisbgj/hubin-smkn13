@@ -85,8 +85,8 @@ class DataIndustriController extends Controller
         $dataindustri = Industri::query();
 
         /* TODO: Ganti percabangan if? */
-        if ($request->nama) $dataindustri = $dataindustri->where('nama', 'like', "%$request->nama%");
-        if ($request->alamat) $dataindustri = $dataindustri->where('alamat', 'like', "%$request->alamat%");
+        if ($request->nama) $dataindustri = $dataindustri->where('nama', 'like', "%{$request->nama}%");
+        if ($request->alamat) $dataindustri = $dataindustri->where('alamat', 'like', "%{$request->alamat}%");
         if ($request->tahun) $dataindustri = $dataindustri->whereYear('tahun', $request->tahun);
 
         $dataindustri = $dataindustri->get();

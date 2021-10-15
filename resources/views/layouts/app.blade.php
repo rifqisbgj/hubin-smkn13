@@ -51,10 +51,10 @@
                                     <a class="nav-link" href="{{ route('admin.home') }}">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.data.industri') }}">Data Industri</a>
+                                    <a class="nav-link" href="{{ route('admin.industri.data') }}">Data Industri</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.data.siswa') }}">Data Siswa</a>
+                                    <a class="nav-link" href="{{ route('admin.siswa.data') }}">Data Siswa</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.pengaturan') }}">Pengaturan Akun</a>

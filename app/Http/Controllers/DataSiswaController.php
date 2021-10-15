@@ -80,8 +80,8 @@ class DataSiswaController extends Controller
     {
         $datasiswa = Siswa::query();
 
-        if ($request->nis) $datasiswa = $datasiswa->where('nis', $request->nis);
-        if ($request->nama) $datasiswa = $datasiswa->where('nama', 'like', "%$request->nama%");
+        if ($request->nis) $datasiswa = $datasiswa->where('nis', 'like', "%{$request->nis}%");
+        if ($request->nama) $datasiswa = $datasiswa->where('nama', 'like', "%{$request->nama}%");
         if ($request->jurusan) $datasiswa = $datasiswa->where('jurusan', $request->jurusan);
         if ($request->kelas) $datasiswa = $datasiswa->where('kelas', $request->kelas);
         if ($request->tahun) $datasiswa = $datasiswa->whereYear('tahun', $request->tahun);

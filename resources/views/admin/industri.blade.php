@@ -6,7 +6,7 @@
 @section('content')
 <div class="modal" id="industriModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered my-3" role="document">
-        <form class="modal-content" id="editIndustri" method="POST" action="{{ route('admin.update.industri') }}">
+        <form class="modal-content" id="editIndustri" method="POST" action="{{ route('admin.industri.update') }}">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -69,7 +69,7 @@
                         <button tabindex="1" class="btn btn-primary" type="submit" id="editIndustriSubmit">Ubah Perubahan</button>
                     </div>
                     <div class="col-auto mr-auto p-0 order-1">
-                        <button tabindex="3" class="btn btn-danger" type="submit" formaction="{{ route('admin.hapus.industri') }}">Hapus</button>
+                        <button tabindex="3" class="btn btn-danger" type="submit" formaction="{{ route('admin.industri.hapus') }}">Hapus</button>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
             <div class="card">
                 <div class="card-header">Data Industri</div>
                 <div class="card-body">
-                    <form id="tambahIndustri" method="POST" action="{{ route('admin.tambah.industri') }}">
+                    <form id="tambahIndustri" method="POST" action="{{ route('admin.industri.tambah') }}">
                         @csrf
 
                         <div class="form-group">
@@ -150,7 +150,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <form class="container" method="POST" action="{{ route('admin.cari.industri') }}">
+                    <form class="container" method="POST" action="{{ route('admin.industri.cari') }}">
                         @csrf
                         <div class="row justify-content-md-center">
                             <div class="col-3 p-0 pr-1">
@@ -183,7 +183,7 @@
                                 <button class="btn btn-sm btn-outline-success w-100" type="submit">Cari</button>
                             </div>
                             <div class="col p-0 pr-1">
-                                <a class="btn btn-sm btn-outline-secondary w-100" href="{{ route('admin.data.industri') }}">Ulang</a>
+                                <a class="btn btn-sm btn-outline-secondary w-100" href="{{ route('admin.industri.data') }}">Ulang</a>
                             </div>
                         </div>
                     </form>

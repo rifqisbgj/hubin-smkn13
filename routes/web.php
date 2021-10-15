@@ -21,44 +21,68 @@ Auth::routes([
     'reset' => false
 ]);
 
-Route::prefix('siswa')->group(function () {
-    Route::get('/', 'SiswaController@index')->name('siswa.home');
-    Route::get('/login', 'SiswaLoginController@loginForm')->name('siswa.login');
-    Route::post('/login', 'SiswaLoginController@login')->name('siswa.login.submit');
-    Route::get('/logout', 'SiswaLoginController@logout')->name('siswa.logout');
+/* Nama Route: siswa
+ * URL Route: /siswa/
+ */
+Route::prefix('siswa')->name('siswa.')->group(function () {
+    Route::get('/', 'SiswaController@index')->name('home');
+    Route::get('/login', 'SiswaLoginController@loginForm')->name('login');
+    Route::post('/login', 'SiswaLoginController@login')->name('login.submit');
+    Route::get('/logout', 'SiswaLoginController@logout')->name('logout');
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('/', 'AdminController@index')->name('admin.home');
+/* Nama Route: admin
+ * URL Route: /admin/
+ */
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', 'AdminController@index')->name('home');
 
-    Route::get('/login', 'AdminLoginController@loginForm')->name('admin.login');
-    Route::post('/login', 'AdminLoginController@login')->name('admin.login.submit');
-    Route::get('/logout', 'AdminLoginController@logout')->name('admin.logout');
+    Route::get('/login', 'AdminLoginController@loginForm')->name('login');
+    Route::post('/login', 'AdminLoginController@login')->name('login.submit');
+    Route::get('/logout', 'AdminLoginController@logout')->name('logout');
 
-    Route::get('/pengaturan', 'AdminController@pengaturan')->name('admin.pengaturan');
-    Route::post('/pengaturan', 'AdminController@pengaturanSubmit')->name('admin.pengaturan.submit');
+    Route::get('/pengaturan', 'AdminController@pengaturan')->name('pengaturan');
+    Route::post('/pengaturan', 'AdminController@pengaturanSubmit')->name('pengaturan.submit');
 
-    Route::get('/data/siswa', 'DataSiswaController@index')->name('admin.data.siswa');
-    Route::post('/data/siswa', 'DataSiswaController@cari')->name('admin.cari.siswa');
+    /* Nama Route: admin.data
+     * URL Route: /admin/data/
+     */
+    Route::prefix('data')->group(function () {
 
-    Route::permanentRedirect('/data/siswa/tambah', '/admin/data/siswa');
-    Route::post('/data/siswa/tambah', 'DataSiswaController@tambah')->name('admin.tambah.siswa');
-    Route::permanentRedirect('/data/siswa/edit', '/admin/data/siswa');
-    Route::post('/data/siswa/edit', 'DataSiswaController@edit')->name('admin.edit.siswa');
-    Route::permanentRedirect('/data/siswa/update', '/admin/data/siswa');
-    Route::post('/data/siswa/update', 'DataSiswaController@update')->name('admin.update.siswa');
-    Route::permanentRedirect('/data/siswa/hapus', '/admin/data/siswa');
-    Route::post('/data/siswa/hapus', 'DataSiswaController@hapus')->name('admin.hapus.siswa');
+        /* Nama Route: admin.data.siswa
+         * URL Route: /admin/data/siswa/
+         */
+        Route::prefix('siswa')->name('siswa.')->group(function () {
+            Route::get('/', 'DataSiswaController@index')->name('data');
+            Route::post('/', 'DataSiswaController@cari')->name('cari');
 
-    Route::get('/data/industri', 'DataIndustriController@index')->name('admin.data.industri');
-    Route::post('/data/industri', 'DataIndustriController@cari')->name('admin.cari.industri');
-    Route::permanentRedirect('/data/industri/{id}', '/admin/data/industri')->where('id', '[0-9]+');
-    Route::post('/data/industri/{id}', 'DataIndustriController@informasi')->where('id', '[0-9]+')->name('admin.informasi.industri');
+            Route::post('/tambah', 'DataSiswaController@tambah')->name('tambah');
+            Route::post('/edit', 'DataSiswaController@edit')->name('edit');
+            Route::post('/update', 'DataSiswaController@update')->name('update');
+            Route::post('/hapus', 'DataSiswaController@hapus')->name('hapus');
+        });
 
-    Route::permanentRedirect('/data/industri/tambah', '/admin/data/industri');
-    Route::post('/data/industri/tambah', 'DataIndustriController@tambah')->name('admin.tambah.industri');
-    Route::permanentRedirect('/data/industri/hapus', '/admin/data/industri');
-    Route::post('/data/industri/hapus', 'DataIndustriController@hapus')->name('admin.hapus.industri');
-    Route::permanentRedirect('/data/industri/update', '/admin/data/industri');
-    Route::post('/data/industri/update', 'DataIndustriController@update')->name('admin.update.industri');
+        /* Nama Route: admin.data.industri
+         * URL Route: /admin/data/industri/
+         */
+        Route::prefix('industri')->name('industri.')->group(function () {
+            Route::get('/', 'DataIndustriController@index')->name('data');
+            Route::post('/', 'DataIndustriController@cari')->name('cari');
+
+            Route::permanentRedirect('/{id}', '/admin/data/industri')->where('id', '[0-9]+');
+            Route::post('/{id}', 'DataIndustriController@informasi')->where('id', '[0-9]+')->name('informasi');
+
+            Route::permanentRedirect('/tambah', '/admin/data/industri');
+            Route::post('/tambah', 'DataIndustriController@tambah')->name('tambah');
+            Route::permanentRedirect('/hapus', '/admin/data/industri');
+            Route::post('/hapus', 'DataIndustriController@hapus')->name('hapus');
+            Route::permanentRedirect('/update', '/admin/data/industri');
+            Route::post('/update', 'DataIndustriController@update')->name('update');
+        });
+    });
+});
+
+// Pengguna memasuki halaman yang tidak ada
+Route::fallback(function () {
+    return redirect()->back();
 });

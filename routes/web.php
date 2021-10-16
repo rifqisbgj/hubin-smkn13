@@ -18,7 +18,7 @@ Route::view('/tentang', 'tentang')->name('tentang');
 
 Auth::routes([
     'register' => false,
-    'reset' => false
+    'reset' => false,
 ]);
 
 /* Nama Route: siswa

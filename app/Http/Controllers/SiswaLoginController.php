@@ -36,6 +36,7 @@ class SiswaLoginController extends Controller
     public function logout()
     {
         Auth::guard('siswa')->logout();
+
         return redirect('/');
     }
 }

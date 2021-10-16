@@ -43,6 +43,7 @@ class AdminController extends Controller
         if ($affected) {
             Auth::guard('admin')->logout();
             Auth::guard('admin')->attempt($credentials, $request->remember);
+
             return redirect()->back()->with('status', true);
         }
 

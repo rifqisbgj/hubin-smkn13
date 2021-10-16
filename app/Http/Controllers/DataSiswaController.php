@@ -17,6 +17,7 @@ class DataSiswaController extends Controller
     public function index()
     {
         $datasiswa = Siswa::toBase()->get();
+
         return view('admin.siswa')->with('datasiswa', $datasiswa);
     }
 
@@ -26,9 +27,9 @@ class DataSiswaController extends Controller
         $this->validate($request, ['nis' => 'unique:App\Siswa,nis']);
 
         /* TODO: password random buat siswa baru */
-       Siswa::insert([
+        Siswa::insert([
             'password' => Hash::make('password'),
-       ] + $request->except('_token', 'password'));
+        ] + $request->except('_token', 'password'));
 
         return back()->with('status', ['success', 'Sukses menambahkan siswa']);
     }
@@ -37,6 +38,7 @@ class DataSiswaController extends Controller
     {
         $siswa = Siswa::find($request->nis);
         $siswa->delete();
+
         return back()->with('status', ['danger', "Sukses menghapus siswa {$request->nis}"]);
     }
 
@@ -44,6 +46,7 @@ class DataSiswaController extends Controller
     public function edit(Request $request)
     {
         $siswa = Siswa::find($request->nis);
+
         return back()->withInput($siswa->attributesToArray())
                      ->with('status', ['warning', "Mengedit data siswa {$siswa->nama}"]);
     }
@@ -51,7 +54,7 @@ class DataSiswaController extends Controller
     public function update(DataSiswa $request)
     {
         // Jika NIS awal dan akhir tidak sama, maka cek jika ada duplikat
-        if (!($request->nis === $request->old_nis)) {
+        if (! ($request->nis === $request->old_nis)) {
             $this->validate($request, ['nis' => 'unique:App\Siswa,nis']);
         }
 
@@ -61,21 +64,31 @@ class DataSiswaController extends Controller
         return back()->with('status', ['success', "Sukses mengedit siswa {$request->nama}"]);
     }
 
-    /* TODO: ganti percabangan if jadi lebih rapih */
     public function cari(Request $request)
     {
         $datasiswa = Siswa::query();
 
-        if ($request->nis) $datasiswa = $datasiswa->where('nis', 'like', "%{$request->nis}%");
-        if ($request->nama) $datasiswa = $datasiswa->where('nama', 'like', "%{$request->nama}%");
-        if ($request->jurusan) $datasiswa = $datasiswa->where('jurusan', $request->jurusan);
-        if ($request->kelas) $datasiswa = $datasiswa->where('kelas', $request->kelas);
-        if ($request->tahun) $datasiswa = $datasiswa->whereYear('tahun', $request->tahun);
+        if ($request->nis) {
+            $datasiswa = $datasiswa->where('nis', 'like', "%{$request->nis}%");
+        }
+        if ($request->nama) {
+            $datasiswa = $datasiswa->where('nama', 'like', "%{$request->nama}%");
+        }
+        if ($request->jurusan) {
+            $datasiswa = $datasiswa->where('jurusan', $request->jurusan);
+        }
+        if ($request->kelas) {
+            $datasiswa = $datasiswa->where('kelas', $request->kelas);
+        }
+        if ($request->tahun) {
+            $datasiswa = $datasiswa->whereYear('tahun', $request->tahun);
+        }
 
         $datasiswa = $datasiswa->get();
+
         return view('admin.siswa')->with([
             'cari' => true,
-            'datasiswa' => $datasiswa
+            'datasiswa' => $datasiswa,
         ] + $request->all());
     }
 }

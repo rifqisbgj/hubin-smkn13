@@ -17,6 +17,7 @@ class DataIndustriController extends Controller
     public function index()
     {
         $dataindustri = Industri::toBase()->get();
+
         return view('admin.industri')->with('dataindustri', $dataindustri);
     }
 
@@ -26,8 +27,9 @@ class DataIndustriController extends Controller
         if ($dataindustri->nis_pengaju) {
             $pengaju = Siswa::find($dataindustri->nis_pengaju);
         }
+
         return response()->json([
-            'industri' => $dataindustri, 
+            'industri' => $dataindustri,
             'pengaju' => $pengaju ?? '',
         ]);
     }
@@ -67,7 +69,7 @@ class DataIndustriController extends Controller
         // Jika ada nis_pengaju maka industri adalah ajuan dan status dapat berubah
         if ($request->nis_pengaju) {
             $industri->update([
-                'status' => $request->status ? true : false
+                'status' => $request->status ? true : false,
             ]);
         }
 
@@ -78,17 +80,23 @@ class DataIndustriController extends Controller
     {
         $dataindustri = Industri::query();
 
-        /* TODO: Ganti percabangan if? */
-        if ($request->nama) $dataindustri = $dataindustri->where('nama', 'like', "%{$request->nama}%");
-        if ($request->alamat) $dataindustri = $dataindustri->where('alamat', 'like', "%{$request->alamat}%");
-        if ($request->tahun) $dataindustri = $dataindustri->whereYear('tahun', $request->tahun);
+        if ($request->nama) {
+            $dataindustri = $dataindustri->where('nama', 'like', "%{$request->nama}%");
+        }
+        if ($request->alamat) {
+            $dataindustri = $dataindustri->where('alamat', 'like', "%{$request->alamat}%");
+        }
+        if ($request->tahun) {
+            $dataindustri = $dataindustri->whereYear('tahun', $request->tahun);
+        }
 
         $dataindustri = $dataindustri->get();
 
         /* TODO: Optimisasi pengecekan jurusan? */
         if ($request->jurusan) {
-            $dataindustri = $dataindustri->filter(function($industri) use ($request) {
+            $dataindustri = $dataindustri->filter(function ($industri) use ($request) {
                 $jurusan = explode(',', $industri->jurusan);
+
                 return array_intersect($jurusan, $request->jurusan);
             });
         }

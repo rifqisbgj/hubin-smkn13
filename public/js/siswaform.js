@@ -21,6 +21,11 @@ function cekJurusan() {
 	$('#kelas').children().each((i, pilihan) => {
 		if (i <= akhir) {
 			$(pilihan).prop('hidden', false);
+
+			if ($('#kelas').val() > i && i == akhir) {
+				$(pilihan).prop('selected', true);
+			}
+
 		} else {
 			$(pilihan).prop('hidden', true);
 		}

@@ -22,12 +22,14 @@ class Siswa extends Migration
             $table->enum('jurusan', ['AK', 'RPL', 'TKJ']);
             $table->year('tahun');
             $table->integer('id_industri')->unsigned()->nullable();
+            $table->rememberToken();
+
+            $table->primary('nis');
+            $table->index('nis');
             $table->foreign('id_industri')
                 ->references('id')
                 ->on('industri')
                 ->onDelete('cascade');
-            $table->rememberToken();
-            $table->primary('nis');
         });
     }
 

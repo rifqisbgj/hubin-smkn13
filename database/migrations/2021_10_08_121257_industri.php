@@ -18,7 +18,7 @@ class Industri extends Migration
             $table->string('nama');
             $table->string('bidang')->nullable();
             $table->string('kontak')->nullable();
-            $table->string('jurusan');
+            $table->set('jurusan', ['AK', 'RPL', 'TKJ']);
             $table->year('tahun');
             $table->text('alamat');
             $table->tinyInteger('kuota')->unsigned();
@@ -31,6 +31,8 @@ class Industri extends Migration
             /* Data Pembimbing */
             $table->string('nama_pembimbing')->nullable();
             $table->unsignedBigInteger('nip_pembimbing')->nullable();
+
+            $table->index('id');
         });
     }
 

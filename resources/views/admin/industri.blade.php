@@ -4,10 +4,10 @@
     <script src="{{ asset('js/dataindustri.js') }}"></script>
 @endpush
 @section('content')
-<div class="modal overflow-hidden" id="industriModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal" id="industriModal" tabindex="-1" role="dialog" aria-labelledby="dataIndustri" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
         <form class="modal-content" id="editIndustri" method="POST" action="{{ route('admin.industri.update') }}">
-            <div class="modal-body">
+            <div class="modal-body p-0">
                 <div class="card-group">
                     <div class="card">
                         <div class="card-header">Data Industri</div>
@@ -81,6 +81,11 @@
                             <div class="form-group">
                                 <label class="form-label">NIP Pembimbing</label>
                                 <input class="form-control form-control-sm" id="industriNIPPem" type="number" name="nip_pembimbing" autocomplete="off">
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <label class="form-label">Catatan</label>
+                                <textarea class="form-control form-control-sm" id="industriCatatan" name="catatan" placeholder="Syarat untuk industri"></textarea>
                             </div>
                         </div>
                     </div>
@@ -164,6 +169,12 @@
                                 <input class="form-control form-control-sm" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ old() ? old('tahun') : date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
                             </div>
                         </div>
+                        <div class="form-group form-row">
+                            <div class="col">
+                                <label class="form-label">Catatan</label>
+                                <textarea class="form-control form-control-sm" name="catatan" placeholder="Syarat untuk industri"></textarea>
+                            </div>
+                        </div>
                         <div class="text-right">
                             <button type="submit" id="tambahIndustriSubmit" class="btn btn-primary">Tambah</button>
                         </div>
@@ -228,7 +239,7 @@
                         </thead>
                         <tbody>
                             @forelse ($dataindustri as $industri)
-                                <tr class="{{ $industri->status ? '' : 'bg-warning' }}" role="button" data-toggle="modal" data-target="#exampleModal" data-id="{{ $industri->id }}">
+                                <tr class="{{ $industri->status ? '' : 'bg-warning' }}" role="button" data-toggle="modal" data-target="#dataIndustri" data-id="{{ $industri->id }}">
                                     <td>{{ $loop->index+1 }}</td>
                                     <td>{{ $industri->nama }}</td>
                                     <td>{{ $industri->bidang }}</td>

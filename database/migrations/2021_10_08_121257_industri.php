@@ -22,6 +22,7 @@ class Industri extends Migration
             $table->year('tahun');
             $table->text('alamat');
             $table->tinyInteger('kuota')->unsigned();
+            $table->text('catatan')->nullable();
 
             /* Pengajuan */
             /* TODO: Foreign key nis siswa? */

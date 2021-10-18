@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'tahun' => 2021,
             'alamat' => 'Jl. AH. Nasution Bandung',
             'kuota' => 4,
+            'catatan' => 'Laki-laki, Mempunyai SIM, Bisa mengendarai motor',
             'nama_pembimbing' => 'Junaedi',
             'nip_pembimbing' => 123,
         ]);

@@ -37,6 +37,18 @@ $(document).ready(function () {
 			$('#industriNamaPem').val(data.industri.nama_pembimbing);
 			$('#industriNIPPem').val(data.industri.nip_pembimbing);
 
+			// Menyesuaikan baris input catatan dengan jumlah baris jika ada catatan
+			if (data.industri.catatan) {
+				let baris = data.industri.catatan.match(/\n/)
+					? data.industri.catatan.match(/\n/g).length + 1
+					: 2;
+				$('#industriCatatan').val(data.industri.catatan);
+				$('#industriCatatan').attr('rows', baris);
+			} else {
+				$('#industriCatatan').val('');
+				$('#industriCatatan').attr('rows', 2);
+			}
+
 			// Jika ada data pengaju maka industri adalah ajuan
 			if (data.pengaju) {
 				$('#industriPengaju').val(data.industri.nis_pengaju);

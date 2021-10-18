@@ -107,7 +107,7 @@
 </div>
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-3">
+        <div class="col-lg-3 pb-2">
             @if (session('status'))
                 <div class="alert alert-{{ session('status')[0] }} mb-2" role="alert">
                     {{ session('status')[1] }}
@@ -188,13 +188,14 @@
                     <form class="container" method="POST" action="{{ route('admin.industri.cari') }}">
                         @csrf
                         <div class="row justify-content-md-center">
-                            <div class="col-3 p-0 pr-1">
+                            <div class="col col-lg-3 p-0 pr-1 pb-2 pb-lg-0">
                                 <input class="form-control form-control-sm" name="nama" placeholder="Nama" value="{{ $nama ?? '' }}" autocomplete="off">
                             </div>
-                            <div class="col-3 p-0 pr-1">
+                            <div class="col col-lg-3 p-0 pr-1 pb-2 pb-lg-0">
                                 <input class="form-control form-control-sm" name="alamat" placeholder="Alamat" value="{{ $alamat ?? '' }}" autocomplete="off">
                             </div>
-                            <div class="col-auto my-auto px-1 text-center">
+                            <div class="w-100 d-block d-lg-none"></div>
+                            <div class="my-auto px-1 pb-2 pb-lg-0 text-center">
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="checkbox" name="jurusan[]" value="AK" {{ in_array('AK', $jurusan ?? []) ? 'checked' : '' }}>AK
@@ -211,10 +212,11 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col p-0 pr-1">
+                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
                                 <input class="form-control form-control-sm" type="number" name="tahun" placeholder="Tahun" value="{{ $tahun ?? '' }}">
                             </div>
-                            <div class="col p-0 pr-1">
+                            <div class="w-100 d-block d-lg-none"></div>
+                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
                                 <button class="btn btn-sm btn-outline-success w-100" type="submit">Cari</button>
                             </div>
                             <div class="col p-0 pr-1">

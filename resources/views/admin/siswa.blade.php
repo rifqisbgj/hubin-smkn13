@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-3">
+        <div class="col-lg-3 pb-2">
             @if (session('status'))
                 <div class="alert alert-{{ session('status')[0] }} mb-2" role="alert">
                     {{ session('status')[1] }}
@@ -24,11 +24,9 @@
                 <div class="card-body">
                     <form method="POST" action="{{ old() && !$errors->any() ? route('admin.siswa.update') : route('admin.siswa.tambah') }}">
                         @csrf
-
                         @if (old())
                             <input type="hidden" name="old_nis" value="{{ old('nis') }}">
                         @endif
-
                         <div class="form-group">
                             <label class="form-label">Nomor Induk Siswa</label>
                             <input class="form-control form-control-sm @error('nis') is-invalid @enderror" type="number" name="nis" value="{{ old('nis') }}" autocomplete="off" required>
@@ -67,9 +65,6 @@
                             <div class="col">
                                 <label class="form-label">Tahun</label>
                                 <input class="form-control form-control-sm" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ old() ? old('tahun') : date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
-                                @if (!old())
-                                    <small class="form-text text-muted">*Terisi otomatis</small>
-                                @endif
                             </div>
                         </div>
                         <div class="text-right">
@@ -86,27 +81,29 @@
                     <form class="container" method="POST" action="{{ route('admin.siswa.cari') }}">
                         @csrf
                         <div class="row justify-content-md-center">
-                            <div class="col-2 p-0 pr-1">
+                            <div class="col col-lg-2 p-0 pr-1 pb-2 pb-lg-0">
                                 <input class="form-control form-control-sm" type="number" name="nis" placeholder="NIS" value="{{ $nis ?? '' }}" autocomplete="off">
                             </div>
-                            <div class="col-3 p-0 pr-1">
+                            <div class="col col-lg-3 p-0 pr-1 pb-2 pb-lg-0">
                                 <input class="form-control form-control-sm" name="nama" placeholder="Nama" value="{{ $nama ?? '' }}" autocomplete="off">
                             </div>
-                            <div class="col-3 p-0 pr-1">
+                            <div class="w-100 d-block d-lg-none"></div>
+                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
                                 <select class="form-control form-control-sm" name="jurusan">
-                                    <option value="">Semua Jurusan</option>
+                                    <option value="">Jurusan</option>
                                     <option value="AK" {{ $jurusan ?? '' == 'AK' ? 'selected' : '' }}>Analis Kimia</option>
                                     <option value="RPL" {{ $jurusan ?? '' == 'RPL' ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
                                     <option value="TKJ" {{ $jurusan ?? '' == 'TKJ' ? 'selected' : '' }}>Teknik Komputer dan Jaringan</option>
                                 </select>
                             </div>
-                            <div class="col p-0 pr-1">
-                                <input class="form-control form-control-sm" type-"number" name="kelas" value="{{ $kelas ?? '' }}" autocomplete="off" placeholder="Kelas">
+                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
+                                <input class="form-control form-control-sm" type="number" name="kelas" value="{{ $kelas ?? '' }}" autocomplete="off" placeholder="Kelas">
                             </div>
-                            <div class="col p-0 pr-1">
-                                <input class="form-control form-control-sm" name="tahun" maxlength="4" pattern="[\d+]{4}" value="{{ $tahun ?? '' }}" autocomplete="off" placeholder="Tahun">
+                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
+                                <input class="form-control form-control-sm" type="number" name="tahun" value="{{ $tahun ?? '' }}" autocomplete="off" placeholder="Tahun">
                             </div>
-                            <div class="col p-0 pr-1">
+                            <div class="w-100 d-block d-lg-none"></div>
+                            <div class="col p-0 pr-1 pr-lg-0 pb-2 pb-lg-0">
                                 <button class="btn btn-sm btn-outline-success w-100" type="submit">Cari</button>
                             </div>
                             <div class="col p-0">

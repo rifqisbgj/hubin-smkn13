@@ -14,8 +14,8 @@ class Industri extends Migration
     public function up()
     {
         Schema::create('industri', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nama');
+            $table->increments('id')->index();
+            $table->string('nama')->unique();
             $table->string('bidang')->nullable();
             $table->string('kontak')->nullable();
             $table->set('jurusan', ['AK', 'RPL', 'TKJ']);
@@ -32,8 +32,6 @@ class Industri extends Migration
             /* Data Pembimbing */
             $table->string('nama_pembimbing')->nullable();
             $table->unsignedBigInteger('nip_pembimbing')->nullable();
-
-            $table->index('id');
         });
     }
 

@@ -18,6 +18,7 @@ class Industri extends Model
         'tahun',
         'alamat',
         'kuota',
+        'catatan',
         'nis_pengaju',
         'status',
         'nama_pembimbing',

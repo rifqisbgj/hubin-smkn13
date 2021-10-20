@@ -46,7 +46,10 @@ class DataIndustriController extends Controller
                 'jurusan' => $jurusan,
             ] + $request->except('_token', 'jurusan'));
 
-        return back()->with('status', ['success', "Sukses menambahkan industri {$request->nama}"]);
+        return back()->with('status', [
+            'success',
+            "Sukses menambahkan industri {$request->nama}",
+        ]);
     }
 
     public function hapus(Request $request)
@@ -56,7 +59,10 @@ class DataIndustriController extends Controller
 
         // Perbarui semua id industri, atau biarkan?
 
-        return back()->with('status', ['danger', "Sukses menghapus {$industri->nama}"]);
+        return back()->with('status', [
+            'danger',
+            "Sukses menghapus {$industri->nama}",
+        ]);
     }
 
     public function update(DataIndustri $request)
@@ -76,7 +82,10 @@ class DataIndustriController extends Controller
             ]);
         }
 
-        return back()->with('status', ['success', "Sukses mengedit {$request->nama}"]);
+        return back()->with('status', [
+            'success',
+            "Sukses mengedit {$request->nama}",
+        ]);
     }
 
     public function cari(Request $request)
@@ -124,9 +133,15 @@ class DataIndustriController extends Controller
         try {
             Excel::import(new IndustriImport, $request->file('file'));
         } catch (Exception $e) {
-            return back()->with('status', ['danger', "Gagal mengupload data industri, laporkan pengembang: {$e}"]);
+            return back()->with('status', [
+                'danger',
+                "Gagal mengupload data industri, laporkan pengembang: {$e}",
+            ]);
         }
 
-        return back()->with('status', ['success', "Sukses mengupload data industri"]);
+        return back()->with('status', [
+            'success',
+            "Sukses mengupload data industri",
+        ]);
     }
 }

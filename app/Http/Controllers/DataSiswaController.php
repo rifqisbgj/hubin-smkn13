@@ -35,7 +35,10 @@ class DataSiswaController extends Controller
             'password' => Hash::make('password'),
         ] + $request->except('_token', 'password'));
 
-        return back()->with('status', ['success', "Sukses menambahkan siswa {$request->nama}"]);
+        return back()->with('status', [
+            'success',
+            "Sukses menambahkan siswa {$request->nama}",
+        ]);
     }
 
     public function hapus(Request $request)
@@ -43,7 +46,10 @@ class DataSiswaController extends Controller
         $siswa = Siswa::find($request->nis);
         $siswa->delete();
 
-        return back()->with('status', ['warning', "Sukses menghapus siswa {$request->nama}"]);
+        return back()->with('status', [
+            'warning',
+            "Sukses menghapus siswa {$request->nama}",
+            ]);
     }
 
     /* TODO: edit password? */
@@ -52,24 +58,37 @@ class DataSiswaController extends Controller
         $siswa = Siswa::find($request->nis);
 
         return back()->withInput($siswa->attributesToArray())
-                     ->with('status', ['warning', "Mengedit data siswa {$siswa->nama}"]);
+                     ->with([
+                         'edit' => true,
+                         'status' => [
+                             'warning',
+                             "Mengedit data siswa {$siswa->nama}",
+                         ]
+                     ]);
     }
 
     public function update(DataSiswa $request)
     {
         // Jika NIS awal dan akhir tidak sama, maka cek jika ada duplikat
         if (! ($request->nis === $request->old_nis)) {
-            $validator = Validator::make($request->all(), ['nis' => 'unique:App\Siswa,nis']);
+            $validator = Validator::make($request->all(), [
+                'nis' => 'unique:App\Siswa,nis'
+            ]);
+
             if ($validator->fails()) {
                 return back()->withInput($request->all())
-                             ->withErrors($validator);
+                             ->withErrors($validator)
+                             ->with('edit', true);
             }
         }
 
         Siswa::where('nis', $request->old_nis)
             ->update($request->except('_token', 'old_nis'));
 
-        return back()->with('status', ['success', "Sukses mengedit siswa {$request->nama}"]);
+        return back()->with('status', [
+            'success',
+            "Sukses mengedit siswa {$request->nama}",
+        ]);
     }
 
     public function cari(Request $request)
@@ -114,9 +133,15 @@ class DataSiswaController extends Controller
         try {
             Excel::import(new SiswaImport, $request->file('file'));
         } catch (Exception $e) {
-            return back()->with('status', ['danger', "Gagal mengupload data siswa, laporkan pengembang: {$e}"]);
+            return back()->with('status', [
+                'danger',
+                "Gagal mengupload data siswa, laporkan pengembang: {$e}",
+            ]);
         }
 
-        return back()->with('status', ['success', "Sukses mengupload data siswa"]);
+        return back()->with('status', [
+            'success',
+            "Sukses mengupload data siswa",
+        ]);
     }
 }

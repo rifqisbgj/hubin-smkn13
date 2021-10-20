@@ -20,12 +20,12 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">{{ old() && !$errors->any() ? 'Edit Siswa' : 'Keterangan Siswa' }}</div>
+                <div class="card-header">{{ session('edit') ? 'Edit Siswa' : 'Keterangan Siswa' }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ old() && !$errors->any() ? route('admin.siswa.update') : route('admin.siswa.tambah') }}">
+                    <form method="POST" action="{{ session('edit') ? route('admin.siswa.update') : route('admin.siswa.tambah') }}">
                         @csrf
-                        @if (old())
-                            <input type="hidden" name="old_nis" value="{{ old('nis') }}">
+                        @if (session('edit'))
+                            <input type="hidden" name="old_nis" value="{{ old('old_nis') ?? old('nis') }}">
                         @endif
                         <div class="form-group">
                             <label class="form-label">Nomor Induk Siswa</label>
@@ -64,13 +64,18 @@
                             </div>
                             <div class="col">
                                 <label class="form-label">Tahun</label>
-                                <input class="form-control form-control-sm" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ old() ? old('tahun') : date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
+                                <input class="form-control form-control-sm" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ old('tahun') ?? date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
                             </div>
                         </div>
                         <div class="text-right">
                             <button type="reset" class="btn btn-primary">Reset</button>
-                            <button type="submit" class="btn btn-primary">{{ old() && !$errors->any() ? 'Edit' : 'Tambah' }}</button>
+                            <button type="submit" class="btn btn-primary">{{ session('edit') ? 'Edit' : 'Tambah' }}</button>
                         </div>
+                        @if(session('edit'))
+                            <div class="text-right pt-1">
+                                <a class="btn btn-secondary" href="">Kembali</a>
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>
@@ -103,7 +108,7 @@
                                 <input class="form-control form-control-sm" type="number" name="tahun" value="{{ $tahun ?? '' }}" autocomplete="off" placeholder="Tahun">
                             </div>
                             <div class="w-100 d-block d-lg-none"></div>
-                            <div class="col p-0 pr-1 pr-lg-0 pb-2 pb-lg-0">
+                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
                                 <button class="btn btn-sm btn-outline-success w-100" type="submit">Cari</button>
                             </div>
                             <div class="col p-0">

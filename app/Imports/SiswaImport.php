@@ -21,9 +21,9 @@ class SiswaImport implements ToModel
         }
 
         // Jika ada duplikat nama jangan tambah
-        $duplikat = Siswa::find($row[0])->get();
+        $duplikat = Siswa::find($row[0]);
 
-        if (count($duplikat)) {
+        if ($duplikat) {
             return null;
         }
 

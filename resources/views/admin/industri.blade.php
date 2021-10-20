@@ -263,6 +263,21 @@
                         </tbody>
                     </table>
                 </div>
+                <hr class="m-0" />
+                <div class="card-body">
+                    <form class="form-row" method="POST" action="{{ route('admin.industri.upload') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="col-lg pb-2 pb-lg-0">
+                            <input class="form-control-file" type="file" name="file" accept=".xlsx" required>
+                        </div>
+                        <div class="col-auto pb-2 pb-lg-0">
+                            <button class="btn btn-success" type="submit">Upload (.xlsx)</button>
+                        </div>
+                        <div class="col-auto">
+                            <a class="btn btn-success" href="{{ route('admin.industri.download') }}">Download (.xlsx)</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

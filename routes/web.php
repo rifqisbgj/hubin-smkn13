@@ -26,6 +26,7 @@ Auth::routes([
  */
 Route::prefix('siswa')->name('siswa.')->group(function () {
     Route::get('/', 'SiswaController@index')->name('home');
+
     Route::get('/login', 'SiswaLoginController@loginForm')->name('login');
     Route::post('/login', 'SiswaLoginController@login')->name('login.submit');
     Route::get('/logout', 'SiswaLoginController@logout')->name('logout');
@@ -60,6 +61,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/edit', 'DataSiswaController@edit')->name('edit');
             Route::post('/update', 'DataSiswaController@update')->name('update');
             Route::post('/hapus', 'DataSiswaController@hapus')->name('hapus');
+
+            Route::get('/download', 'DataSiswaController@download')->name('download');
+            Route::post('/upload', 'DataSiswaController@upload')->name('upload');
         });
 
         /* Nama Route: admin.data.industri
@@ -68,16 +72,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('industri')->name('industri.')->group(function () {
             Route::get('/', 'DataIndustriController@index')->name('data');
             Route::post('/', 'DataIndustriController@cari')->name('cari');
-
-            Route::permanentRedirect('/{id}', '/admin/data/industri')->where('id', '[0-9]+');
             Route::post('/{id}', 'DataIndustriController@informasi')->where('id', '[0-9]+')->name('informasi');
 
-            Route::permanentRedirect('/tambah', '/admin/data/industri');
             Route::post('/tambah', 'DataIndustriController@tambah')->name('tambah');
-            Route::permanentRedirect('/hapus', '/admin/data/industri');
             Route::post('/hapus', 'DataIndustriController@hapus')->name('hapus');
-            Route::permanentRedirect('/update', '/admin/data/industri');
             Route::post('/update', 'DataIndustriController@update')->name('update');
+
+            Route::get('/download', 'DataIndustriController@download')->name('download');
+            Route::post('/upload', 'DataIndustriController@upload')->name('upload');
         });
     });
 });

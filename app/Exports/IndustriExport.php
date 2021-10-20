@@ -20,7 +20,7 @@ class IndustriExport implements FromCollection, WithHeadings, ShouldAutoSize
     public function headings(): array
     {
         return [
-            'ID_Industri',
+            'ID',
             'Nama',
             'Bidang',
             'Kontak',
@@ -29,10 +29,10 @@ class IndustriExport implements FromCollection, WithHeadings, ShouldAutoSize
             'Alamat',
             'Kuota',
             'Catatan',
-            'NIS_Pengaju',
+            'NIS Pengaju',
             'Status',
-            'Nama_Pembimbing',
-            'NIP_Pembimbing',
+            'Nama Pembimbing',
+            'NIP Pembimbing',
         ];
     }
 }

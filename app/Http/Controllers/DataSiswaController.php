@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\DataSiswa;
+use App\Exports\SiswaExport;
+use App\Imports\SiswaImport;
 use App\Siswa;
 
 class DataSiswaController extends Controller
@@ -31,7 +35,7 @@ class DataSiswaController extends Controller
             'password' => Hash::make('password'),
         ] + $request->except('_token', 'password'));
 
-        return back()->with('status', ['success', 'Sukses menambahkan siswa']);
+        return back()->with('status', ['success', "Sukses menambahkan siswa {$request->nama}"]);
     }
 
     public function hapus(Request $request)
@@ -39,7 +43,7 @@ class DataSiswaController extends Controller
         $siswa = Siswa::find($request->nis);
         $siswa->delete();
 
-        return back()->with('status', ['danger', "Sukses menghapus siswa {$request->nis}"]);
+        return back()->with('status', ['warning', "Sukses menghapus siswa {$request->nama}"]);
     }
 
     /* TODO: edit password? */
@@ -55,7 +59,11 @@ class DataSiswaController extends Controller
     {
         // Jika NIS awal dan akhir tidak sama, maka cek jika ada duplikat
         if (! ($request->nis === $request->old_nis)) {
-            $this->validate($request, ['nis' => 'unique:App\Siswa,nis']);
+            $validator = Validator::make($request->all(), ['nis' => 'unique:App\Siswa,nis']);
+            if ($validator->fails()) {
+                return back()->withInput($request->all())
+                             ->withErrors($validator);
+            }
         }
 
         Siswa::where('nis', $request->old_nis)
@@ -90,5 +98,25 @@ class DataSiswaController extends Controller
             'cari' => true,
             'datasiswa' => $datasiswa,
         ] + $request->all());
+    }
+
+    public function download()
+    {
+        return Excel::download(new SiswaExport, 'Siswa.xlsx');
+    }
+
+    public function upload(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|file|mimes:xlsx',
+        ]);
+
+        try {
+            Excel::import(new SiswaImport, $request->file('file'));
+        } catch (Exception $e) {
+            return back()->with('status', ['danger', "Gagal mengupload data siswa, laporkan pengembang: {$e}"]);
+        }
+
+        return back()->with('status', ['success', "Sukses mengupload data siswa"]);
     }
 }

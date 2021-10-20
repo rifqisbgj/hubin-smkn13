@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\DataIndustri;
+use App\Exports\IndustriExport;
+use App\Imports\IndustriImport;
 use App\Industri;
 use App\Siswa;
 
@@ -105,5 +108,25 @@ class DataIndustriController extends Controller
             'cari' => true,
             'dataindustri' => $dataindustri,
         ] + $request->all());
+    }
+
+    public function download()
+    {
+        return Excel::download(new IndustriExport, 'Industri.xlsx');
+    }
+
+    public function upload(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|file|mimes:xlsx',
+        ]);
+
+        try {
+            Excel::import(new IndustriImport, $request->file('file'));
+        } catch (Exception $e) {
+            return back()->with('status', ['danger', "Gagal mengupload data industri, laporkan pengembang: {$e}"]);
+        }
+
+        return back()->with('status', ['success', "Sukses mengupload data industri"]);
     }
 }

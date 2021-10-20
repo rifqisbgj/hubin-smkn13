@@ -4,9 +4,8 @@ namespace App\Imports;
 
 use App\Industri;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class IndustriImport implements ToModel, WithUpserts
+class IndustriImport implements ToModel
 {
     /**
     * @param array $row
@@ -15,27 +14,31 @@ class IndustriImport implements ToModel, WithUpserts
     */
     public function model(array $row)
     {
+        // Jika kolom pertama bukan angka, lewat
         if (!is_numeric($row[0])) {
             return null;
         }
 
-        return new Industri([
-            'nama' => row['Nama'],
-            'bidang' => row['Bidang'],
-            'kontak' => row['Kontak'],
-            'jurusan' => row['Jurusan'],
-            'tahun' => row['Tahun'],
-            'alamat' => row['Alamat'],
-            'kuota' => row['Kuota'],
-            'nis_pengaju' => row['NIS_Pengaju'],
-            'status' => row['Status'],
-            'nama_pembimbing' => row['Nama_Pembimbing'],
-            'nip_pembimbing'=> row['NIP_Pembimbing'],
-        ]);
-    }
+        // Jika ada duplikat nama jangan tambah
+        $duplikat = Industri::where('nama', $row[1])->get();
 
-    public function uniqueBy()
-    {
-        return 'nama';
+        if (count($duplikat)) {
+            return null;
+        }
+
+        return new Industri([
+            'nama' => $row[1],
+            'bidang' => $row[2] ?? null,
+            'kontak' => $row[3] ?? null,
+            'jurusan' => $row[4],
+            'tahun' => $row[5],
+            'alamat' => $row[6],
+            'kuota' => $row[7],
+            'catatan' => $row[8] ?? null,
+            'nis_pengaju' => $row[9] ?? null,
+            'status' => $row[10] ?? 0,
+            'nama_pembimbing' => $row[11] ?? null,
+            'nip_pembimbing'=> $row[12] ?? null,
+        ]);
     }
 }

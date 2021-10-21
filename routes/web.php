@@ -30,6 +30,9 @@ Route::prefix('siswa')->name('siswa.')->group(function () {
     Route::get('/login', 'SiswaLoginController@loginForm')->name('login');
     Route::post('/login', 'SiswaLoginController@login')->name('login.submit');
     Route::get('/logout', 'SiswaLoginController@logout')->name('logout');
+
+    Route::get('/pengaturan', 'SiswaController@pengaturan')->name('pengaturan');
+    Route::post('/pengaturan', 'SiswaController@pengaturanSubmit')->name('pengaturan.submit');
 });
 
 /* Nama Route: admin

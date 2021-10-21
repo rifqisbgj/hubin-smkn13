@@ -46,7 +46,7 @@
                             <a class="nav-link" href="{{ route('tentang') }}">Tentang</a>
                         </li>
                         @auth
-                            @auth('admin')
+                            @if(Route::is('admin.*') )
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.home') }}">Home</a>
                                 </li>
@@ -59,8 +59,8 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.pengaturan') }}">Pengaturan Akun</a>
                                 </li>
-                            @endauth
-                            @auth('siswa')
+                            @endif
+                            @if(Route::is('siswa.*') )
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('siswa.home') }}">Home</a>
                                 </li>
@@ -71,7 +71,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="">Hasil Data Pemetaan</a>
                                 </li>
-                            @endauth
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('siswa.pengaturan') }}">Pengaturan Akun</a>
+                                </li>
+                            @endif
 
                             <span class="navbar-text">
                                 @auth('admin') {{ Auth::user()->username }} @endauth

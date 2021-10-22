@@ -1,0 +1,39 @@
+main {
+	font-family: 'Montserrat', sans-serif;
+	background-color: var(--maincolor);
+}
+
+header h1 {
+	font-weight: bolder;
+	margin: 0 0 5% 2%;
+	color: var(--maintext);
+}
+
+.card {
+	height: 100%;
+	background-color: var(--secondarycolor);
+	box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+h4, p {
+	color: var(--maincolor);
+}
+
+.fab {
+	margin-right: 2%;
+}
+
+.fa-instagram, .fa-github, .fa-linkedin {
+	color: var(--maincolor);
+	transition: 0.3s;
+}
+
+.fab:hover {
+	color: var(--ctacolor);
+}

@@ -17,10 +17,13 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">-->
 
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    @stack('style')
 </head>
 <body>
     <div id="app">
@@ -45,8 +48,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('tentang') }}">Tentang</a>
                         </li>
-                        @auth
-                            @if(Route::is('admin.*') )
+                        @if(Auth::getDefaultDriver())
+                            @if(Auth::guard('admin')->check())
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.home') }}">Home</a>
                                 </li>
@@ -60,7 +63,7 @@
                                     <a class="nav-link" href="{{ route('admin.pengaturan') }}">Pengaturan Akun</a>
                                 </li>
                             @endif
-                            @if(Route::is('siswa.*') )
+                            @if(Auth::guard('siswa')->check())
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('siswa.home') }}">Home</a>
                                 </li>
@@ -77,18 +80,25 @@
                             @endif
 
                             <span class="navbar-text">
-                                @auth('admin') {{ Auth::user()->username }} @endauth
-                                @auth('siswa') {{ Auth::user()->nama }} {{ Auth::user()->nis }} @endauth
+                                @if(Auth::guard('admin')->check())
+                                    {{ Auth::guard('admin')->user()->username }}
+                                @endif
+                                @if(Auth::guard('siswa')->check())
+                                    {{ Auth::guard()->user()->nama }}
+                                    {{ Auth::guard()->user()->nis }}
+                                @endif
                             </span>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route(Auth::getDefaultDriver() . ".logout") }}">Logout</a>
-                            </li>
+                            @auth
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route(Auth::getDefaultDriver() . ".logout") }}">Logout</a>
+                                </li>
+                            @endauth
                         @else
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('siswa.login') }}">Login</a>
                             </li>
-                        @endauth
+                        @endif
                     </ul>
                 </div>
             </div>

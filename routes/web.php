@@ -48,12 +48,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/pengaturan', 'AdminController@pengaturan')->name('pengaturan');
     Route::post('/pengaturan', 'AdminController@pengaturanSubmit')->name('pengaturan.submit');
 
-    /* Nama Route: admin.data
+    /* Nama Route: admin
      * URL Route: /admin/data/
      */
     Route::prefix('data')->group(function () {
 
-        /* Nama Route: admin.data.siswa
+        /* Nama Route: admin.siswa
          * URL Route: /admin/data/siswa/
          */
         Route::prefix('siswa')->name('siswa.')->group(function () {
@@ -68,7 +68,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/upload', 'DataSiswaController@upload')->name('upload');
         });
 
-        /* Nama Route: admin.data.industri
+        /* Nama Route: admin.industri
          * URL Route: /admin/data/industri/
          */
         Route::prefix('industri')->name('industri.')->group(function () {

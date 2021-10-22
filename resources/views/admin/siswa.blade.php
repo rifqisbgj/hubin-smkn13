@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @push('script')
-    <script src="{{ asset('js/siswaform.js') }}"></script>
+    <script src="{{ asset('js/datasiswa.js') }}"></script>
 @endpush
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-3 pb-2">
+        <div class="col-auto col-lg-3 pb-2">
             @if (session('status'))
                 <div class="alert alert-{{ session('status')[0] }} mb-2" role="alert">
                     {{ session('status')[1] }}
@@ -82,40 +82,11 @@
         </div>
         <div class="col">
             <div class="card">
-                <div class="card-body px-2">
-                    <form class="container" method="POST" action="{{ route('admin.siswa.cari') }}">
-                        @csrf
-                        <div class="row justify-content-md-center">
-                            <div class="col col-lg-2 p-0 pr-1 pb-2 pb-lg-0">
-                                <input class="form-control form-control-sm" type="number" name="nis" placeholder="NIS" value="{{ $nis ?? '' }}" autocomplete="off">
-                            </div>
-                            <div class="col col-lg-3 p-0 pr-1 pb-2 pb-lg-0">
-                                <input class="form-control form-control-sm" name="nama" placeholder="Nama" value="{{ $nama ?? '' }}" autocomplete="off">
-                            </div>
-                            <div class="w-100 d-block d-lg-none"></div>
-                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
-                                <select class="form-control form-control-sm" name="jurusan">
-                                    <option value="">Jurusan</option>
-                                    <option value="AK" {{ $jurusan ?? '' == 'AK' ? 'selected' : '' }}>Analis Kimia</option>
-                                    <option value="RPL" {{ $jurusan ?? '' == 'RPL' ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
-                                    <option value="TKJ" {{ $jurusan ?? '' == 'TKJ' ? 'selected' : '' }}>Teknik Komputer dan Jaringan</option>
-                                </select>
-                            </div>
-                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
-                                <input class="form-control form-control-sm" type="number" name="kelas" value="{{ $kelas ?? '' }}" autocomplete="off" placeholder="Kelas">
-                            </div>
-                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
-                                <input class="form-control form-control-sm" type="number" name="tahun" value="{{ $tahun ?? '' }}" autocomplete="off" placeholder="Tahun">
-                            </div>
-                            <div class="w-100 d-block d-lg-none"></div>
-                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
-                                <button class="btn btn-sm btn-outline-success w-100" type="submit">Cari</button>
-                            </div>
-                            <div class="col p-0">
-                                <a class="btn btn-sm btn-outline-secondary w-100" href="{{ route('admin.siswa.data') }}">Ulang</a>
-                            </div>
-                        </div>
-                    </form>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Cari Siswa:</span>
+                    </div>
+                    <input class="form-control" id="siswaCari" placeholder="NIS/Nama/Jenis Kelamin...">
                 </div>
                 <div class="card-body p-0" style="overflow-y: auto; height: 75vh">
                     <table class="table table-hover">
@@ -130,7 +101,7 @@
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="siswaTabel">
                             @forelse ($datasiswa as $siswa)
                             <tr>
                                 <td>{{ $siswa->nis }}</td>

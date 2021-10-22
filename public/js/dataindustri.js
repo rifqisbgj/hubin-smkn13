@@ -88,4 +88,22 @@ $(document).ready(function () {
 		}
 	});
 
+	/*
+	 * Fitur cari industri
+	 */
+	$('#industriCari').on('keyup', function () {
+		let cari = $(this).val().toLowerCase().trim().split(' ');
+
+		$('#industriTabel tr').each(function () {
+			let industri = $(this).text().toLowerCase();
+			let cocok = false;
+
+			cari.forEach(function (i) {
+				if (industri.indexOf(i) > -1) cocok = true;
+			});
+
+			$(this).toggle(cocok);
+		});
+	});
+
 }); 

@@ -58,7 +58,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
          */
         Route::prefix('siswa')->name('siswa.')->group(function () {
             Route::get('/', 'DataSiswaController@index')->name('data');
-            Route::post('/', 'DataSiswaController@cari')->name('cari');
 
             Route::post('/tambah', 'DataSiswaController@tambah')->name('tambah');
             Route::post('/edit', 'DataSiswaController@edit')->name('edit');
@@ -74,7 +73,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
          */
         Route::prefix('industri')->name('industri.')->group(function () {
             Route::get('/', 'DataIndustriController@index')->name('data');
-            Route::post('/', 'DataIndustriController@cari')->name('cari');
             Route::post('/{id}', 'DataIndustriController@informasi')->where('id', '[0-9]+')->name('informasi');
 
             Route::post('/tambah', 'DataIndustriController@tambah')->name('tambah');

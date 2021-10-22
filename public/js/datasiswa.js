@@ -7,6 +7,25 @@ $(document).ready(function() {
 	cekJurusan()
 	// Cek jurusan ketika jurusan terganti
 	$('#jurusan').change(cekJurusan);
+
+	/*
+	 * Fitur search siswa
+	 */
+	$('#siswaCari').on('keyup', function () {
+		let cari = $(this).val().toLowerCase().trim().split(' ');
+
+		$('#siswaTabel tr').each(function () {
+			let siswa = $(this).text().toLowerCase();
+			let cocok = false;
+
+			cari.forEach(function (i) {
+				if (siswa.indexOf(i) > -1) cocok = true;
+			});
+
+			$(this).toggle(cocok);
+		});
+	});
+
 });
 
 function cekJurusan() {

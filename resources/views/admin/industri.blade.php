@@ -97,7 +97,7 @@
                         <button tabindex="2" class="btn btn-secondary" type="button" data-dismiss="modal">Tutup</button>
                         <button tabindex="1" class="btn btn-primary" type="submit" id="editIndustriSubmit">Ubah Perubahan</button>
                     </div>
-                    <div class="col-auto mr-auto p-0 order-1">
+                    <div class="col-auto mr-auto p-0 pb-1 pb-lg-0 order-1">
                         <button tabindex="4" class="btn btn-danger" type="submit" formaction="{{ route('admin.industri.hapus') }}">Hapus</button>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
 </div>
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-lg-3 pb-2">
+        <div class="col-auto col-xl-3 pb-2">
             @if (session('status'))
                 <div class="alert alert-{{ session('status')[0] }} mb-2" role="alert">
                     {{ session('status')[1] }}
@@ -166,7 +166,7 @@
                             </div>
                             <div class="col">
                                 <label class="form-label">Tahun</label>
-                                <input class="form-control form-control-sm" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ old() ? old('tahun') : date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
+                                <input class="form-control form-control-sm" name="tahun" type="number" value="{{ old('tahun') ?? date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
                             </div>
                         </div>
                         <div class="form-group form-row">
@@ -184,46 +184,11 @@
         </div>
         <div class="col">
             <div class="card">
-                <div class="card-body">
-                    <form class="container" method="POST" action="{{ route('admin.industri.cari') }}">
-                        @csrf
-                        <div class="row justify-content-md-center">
-                            <div class="col col-lg-3 p-0 pr-1 pb-2 pb-lg-0">
-                                <input class="form-control form-control-sm" name="nama" placeholder="Nama" value="{{ $nama ?? '' }}" autocomplete="off">
-                            </div>
-                            <div class="col col-lg-3 p-0 pr-1 pb-2 pb-lg-0">
-                                <input class="form-control form-control-sm" name="alamat" placeholder="Alamat" value="{{ $alamat ?? '' }}" autocomplete="off">
-                            </div>
-                            <div class="w-100 d-block d-lg-none"></div>
-                            <div class="my-auto px-1 pb-2 pb-lg-0 text-center">
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="jurusan[]" value="AK" {{ in_array('AK', $jurusan ?? []) ? 'checked' : '' }}>AK
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="jurusan[]" value="RPL" {{ in_array('RPL', $jurusan ?? []) ? 'checked' : '' }}>RPL
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="jurusan[]" value="TKJ" {{ in_array('TKJ', $jurusan ?? []) ? 'checked' : '' }}>TKJ
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
-                                <input class="form-control form-control-sm" type="number" name="tahun" placeholder="Tahun" value="{{ $tahun ?? '' }}">
-                            </div>
-                            <div class="w-100 d-block d-lg-none"></div>
-                            <div class="col p-0 pr-1 pb-2 pb-lg-0">
-                                <button class="btn btn-sm btn-outline-success w-100" type="submit">Cari</button>
-                            </div>
-                            <div class="col p-0 pr-1">
-                                <a class="btn btn-sm btn-outline-secondary w-100" href="{{ route('admin.industri.data') }}">Ulang</a>
-                            </div>
-                        </div>
-                    </form>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Cari Industri:</span>
+                    </div>
+                    <input class="form-control" id="industriCari" placeholder="Nama/Bidang/Alamat/Kontak...">
                 </div>
                 <div class="card-body p-0" style="overflow-y: auto; height: 75vh">
                     <table class="table table-hover">
@@ -239,13 +204,13 @@
                                 <th class="text-center">Tahun</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="industriTabel">
                             @forelse ($dataindustri as $industri)
                                 <tr class="{{ $industri->status ? '' : 'bg-warning' }}" role="button" data-toggle="modal" data-target="#dataIndustri" data-id="{{ $industri->id }}">
                                     <td>{{ $loop->index+1 }}</td>
                                     <td>{{ $industri->nama }}</td>
                                     <td>{{ $industri->bidang }}</td>
-                                    <td class="text-center">
+                                    <td class="text-center industriTabelJurusan">
                                         {!! strpos($industri->jurusan, 'AK') !== false ? '<span class="badge badge-info">AK</span>' : '' !!}
                                         {!! strpos($industri->jurusan, 'RPL') !== false ? '<span class="badge badge-secondary">RPL</span>' : '' !!}
                                         {!! strpos($industri->jurusan, 'TKJ') !== false ? '<span class="badge badge-dark">TKJ</span>' : '' !!}

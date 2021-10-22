@@ -88,37 +88,6 @@ class DataIndustriController extends Controller
         ]);
     }
 
-    public function cari(Request $request)
-    {
-        $dataindustri = Industri::query();
-
-        if ($request->nama) {
-            $dataindustri = $dataindustri->where('nama', 'like', "%{$request->nama}%");
-        }
-        if ($request->alamat) {
-            $dataindustri = $dataindustri->where('alamat', 'like', "%{$request->alamat}%");
-        }
-        if ($request->tahun) {
-            $dataindustri = $dataindustri->whereYear('tahun', $request->tahun);
-        }
-
-        $dataindustri = $dataindustri->get();
-
-        /* TODO: Optimisasi pengecekan jurusan? */
-        if ($request->jurusan) {
-            $dataindustri = $dataindustri->filter(function ($industri) use ($request) {
-                $jurusan = explode(',', $industri->jurusan);
-
-                return array_intersect($jurusan, $request->jurusan);
-            });
-        }
-
-        return view('admin.industri')->with([
-            'cari' => true,
-            'dataindustri' => $dataindustri,
-        ] + $request->all());
-    }
-
     public function download()
     {
         return Excel::download(new IndustriExport, 'Industri.xlsx');

@@ -21,7 +21,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Ajukan Industri</h5>
                                 Ajukan industri dari luar rekomendasi sekolah
-                                <a href="#" class="stretched-link"></a>
+                                <a href="{{ route('siswa.ajukan') }}" class="stretched-link"></a>
                             </div>
                         </div>
                         <div class="card btn btn-success text-reset">

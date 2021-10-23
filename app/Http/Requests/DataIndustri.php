@@ -37,8 +37,8 @@ class DataIndustri extends FormRequest
             ],
             'tahun' => "required|integer|gte:2020|lte:{$tahun}",
             'alamat' => 'required',
-            'kuota' => 'required|integer|min:0',
-            'nis_pengaju' => 'nullable|required_with:status|integer',
+            'kuota' => 'required|integer|min:1',
+            'nis_pengaju' => 'nullable|required_with:status|integer|exists:App\Siswa,nis',
             'nama_pembimbing' => 'nullable',
             'nip_pembimbing' => 'nullable|integer',
         ];

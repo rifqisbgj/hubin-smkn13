@@ -84,8 +84,8 @@
                                     {{ Auth::guard('admin')->user()->username }}
                                 @endif
                                 @if(Auth::guard('siswa')->check())
-                                    {{ Auth::guard()->user()->nama }}
-                                    {{ Auth::guard()->user()->nis }}
+                                    {{ Auth::guard('siswa')->user()->nama }}
+                                    {{ Auth::guard('siswa')->user()->nis }}
                                 @endif
                             </span>
 

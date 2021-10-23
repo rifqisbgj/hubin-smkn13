@@ -33,6 +33,9 @@ Route::prefix('siswa')->name('siswa.')->group(function () {
 
     Route::get('/pengaturan', 'SiswaController@pengaturan')->name('pengaturan');
     Route::post('/pengaturan', 'SiswaController@pengaturanSubmit')->name('pengaturan.submit');
+
+    Route::get('/ajukan', 'SiswaController@ajukan')->name('ajukan');
+    Route::post('/ajukan', 'SiswaController@ajukanSubmit')->name('ajukan.submit');
 });
 
 /* Nama Route: admin

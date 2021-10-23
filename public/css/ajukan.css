@@ -1,0 +1,59 @@
+main {
+	font-family: 'Montserrat', sans-serif;
+	background-color: var(--maincolor);
+	color: var(--maintext);
+}
+
+header h1 {
+	font-weight: bolder;
+	margin: 5% 0 5% 2%;
+
+}
+
+.form-group, .form-check {
+	margin-bottom: 5%;
+}
+
+.custom-control {
+	display: inline;
+	margin-right: 3%;
+}
+
+input[type="checkbox"]:checked + label::after {
+	background-color: var(--ctacolor);
+	border-radius: 3px;
+}
+
+textarea {
+	resize: none;
+}
+
+.submitBtn {
+	background-color: var(--ctacolor);
+	color: var(--maincolor);
+	border-radius: 5px;
+	padding: 2% 3% 2% 3%;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.submitBtn:hover {
+	background-color: var(--hovercta);
+	color: var(--maincolor);
+}
+
+.resetBtn {
+	background-color: var(--maincolor);
+	border: 1px solid var(--ctacolor);
+	color: var(--ctacolor);
+	border-radius: 5px;
+	padding: 2% 3% 2% 3%;
+	margin-left: 2%;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.resetBtn:hover {
+	background-color: var(--ctacolor);
+	color: var(--maincolor);
+}

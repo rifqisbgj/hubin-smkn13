@@ -66,6 +66,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/edit', 'DataSiswaController@edit')->name('edit');
             Route::post('/update', 'DataSiswaController@update')->name('update');
             Route::post('/hapus', 'DataSiswaController@hapus')->name('hapus');
+            Route::post('/kick', 'DataSiswaController@kick')->name('kick');
 
             Route::get('/download', 'DataSiswaController@download')->name('download');
             Route::post('/upload', 'DataSiswaController@upload')->name('upload');

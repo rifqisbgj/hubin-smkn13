@@ -20,7 +20,8 @@ class DataSiswaController extends Controller
 
     public function index()
     {
-        $datasiswa = Siswa::toBase()->get();
+        $datasiswa = Siswa::leftJoin('industri', 'industri.id', '=', 'siswa.id_industri')
+            ->get(['siswa.*', 'industri.nama AS industri']);
 
         return view('admin.siswa')->with('datasiswa', $datasiswa);
     }
@@ -91,32 +92,17 @@ class DataSiswaController extends Controller
         ]);
     }
 
-    public function cari(Request $request)
+    public function kick(Request $request)
     {
-        $datasiswa = Siswa::query();
+        Siswa::where('nis', $request->old_nis)
+            ->update([
+                'id_industri' => null,
+            ]);
 
-        if ($request->nis) {
-            $datasiswa = $datasiswa->where('nis', 'like', "%{$request->nis}%");
-        }
-        if ($request->nama) {
-            $datasiswa = $datasiswa->where('nama', 'like', "%{$request->nama}%");
-        }
-        if ($request->jurusan) {
-            $datasiswa = $datasiswa->where('jurusan', $request->jurusan);
-        }
-        if ($request->kelas) {
-            $datasiswa = $datasiswa->where('kelas', $request->kelas);
-        }
-        if ($request->tahun) {
-            $datasiswa = $datasiswa->whereYear('tahun', $request->tahun);
-        }
-
-        $datasiswa = $datasiswa->get();
-
-        return view('admin.siswa')->with([
-            'cari' => true,
-            'datasiswa' => $datasiswa,
-        ] + $request->all());
+        return back()->with('status', [
+            'success',
+            "Sukses mengeluarkan siswa {$request->nama} dari industri",
+        ]);
     }
 
     public function download()

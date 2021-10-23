@@ -73,6 +73,9 @@
                         </div>
                         @if(session('edit'))
                             <div class="text-right pt-1">
+                                @if(old('id_industri') > 0)
+                                    <button class="btn btn-warning mb-0 mb-lg-1" type="submit" formaction="{{ route('admin.siswa.kick') }}">Hapus Industri</button>
+                                @endif
                                 <a class="btn btn-secondary" href="">Kembali</a>
                             </div>
                         @endif
@@ -98,6 +101,7 @@
                                 <th>Jurusan</th>
                                 <th>Kelas</th>
                                 <th>Tahun</th>
+                                <th>Industri</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -110,26 +114,19 @@
                                 <td>{{ $siswa->jurusan }}</td>
                                 <td>{{ $siswa->kelas }}</td>
                                 <td>{{ $siswa->tahun }}</td>
+                                <td class="text-truncate">{{ $siswa->industri ?? 'Kosong' }}</td>
                                 <td class="text-center">
                                     <form class="d-inline" method="POST" action="{{ route('admin.siswa.edit') }}">
                                         @csrf
                                         <input type="hidden" name="nis" value="{{ $siswa->nis }}">
-                                        <button type="submit" class="btn btn-sm btn-outline-info">Edit</button>
-                                    </form>
-                                    <form class="d-inline" method="POST" action="{{ route('admin.siswa.hapus') }}">
-                                        @csrf
-                                        <input type="hidden" name="nis" value="{{ $siswa->nis }}">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-info mb-1 mb-xl-0">Edit</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" formaction="{{ route('admin.siswa.hapus') }}">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
                             @empty
                                 <tr>
-                                    @if ($cari ?? '')
-                                        <th colspan="7">Data siswa tidak ditemukan!</th>
-                                    @else
-                                        <th colspan="7">Data siswa kosong!</th>
-                                    @endif
+                                    <th colspan="8">Data siswa kosong!</th>
                                 </tr>
                             @endforelse
                         </tbody>

@@ -91,6 +91,7 @@
                     </div>
                     <input class="form-control" id="siswaCari" placeholder="NIS/Nama/Jenis Kelamin...">
                 </div>
+                <small class="form-text text-muted mx-auto mb-1">Gunakan kutip (") untuk mencari lebih dari 2 kata</small>
                 <div class="card-body p-0" style="overflow-y: auto; height: 75vh">
                     <table class="table table-hover">
                         <thead>

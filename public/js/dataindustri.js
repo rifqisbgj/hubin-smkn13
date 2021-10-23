@@ -1,4 +1,4 @@
-/* 
+/*
  * Script ini digunakan untuk:
  * Mendapatkan data sebuah industri dan menampilkan ke modal bootstrap
  * Validasi form industri jurusan minimal ada satu
@@ -69,7 +69,7 @@ $(document).ready(function () {
 
 	});
 
-	/* 
+	/*
 	 * Validasi form
 	 * TODO: Highlight input jurusan dan ganti alert
 	 */
@@ -92,18 +92,24 @@ $(document).ready(function () {
 	 * Fitur cari industri
 	 */
 	$('#industriCari').on('keyup', function () {
-		let cari = $(this).val().toLowerCase().trim().split(' ');
+		if ($(this).val() === '') {
+			$('#industriTabel tr').show();
+			return;
+		}
+
+		let cari = $(this).val().toLowerCase().trim().match(/\w+|"[^"]+"|'[^']+'/g);
 
 		$('#industriTabel tr').each(function () {
 			let industri = $(this).text().toLowerCase();
 			let cocok = false;
 
-			cari.forEach(function (i) {
-				if (industri.indexOf(i) > -1) cocok = true;
+			cari.forEach(function (keyword) {
+				keyword = keyword.replace(/\'\"/g, '');
+				if (industri.indexOf(keyword) > -1) cocok = true;
 			});
 
 			$(this).toggle(cocok);
 		});
 	});
 
-}); 
+});

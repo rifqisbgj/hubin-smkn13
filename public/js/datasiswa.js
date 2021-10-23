@@ -12,14 +12,20 @@ $(document).ready(function() {
 	 * Fitur search siswa
 	 */
 	$('#siswaCari').on('keyup', function () {
-		let cari = $(this).val().toLowerCase().trim().split(' ');
+		if ($(this).val() === '') {
+			$('#siswaTabel tr').show();
+			return;
+		}
+
+		let cari = $(this).val().toLowerCase().trim().match(/\w+|"[^"]+"|'[^']+'/g);
 
 		$('#siswaTabel tr').each(function () {
 			let siswa = $(this).text().toLowerCase();
 			let cocok = false;
 
-			cari.forEach(function (i) {
-				if (siswa.indexOf(i) > -1) cocok = true;
+			cari.forEach(function (keyword) {
+				keyword = keyword.replace(/\'\"/g, '');
+				if (siswa.indexOf(keyword) > -1) cocok = true;
 			});
 
 			$(this).toggle(cocok);

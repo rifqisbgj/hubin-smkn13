@@ -75,17 +75,17 @@
                             <label class="form-label">Menerima </label><br>
                             <input type="hidden" name="jurusan[]" value="{{ Auth::user()->jurusan }}">
                             <div class="custom-control custom-control-inline custom-checkbox">
-                                <input class="custom-control-input" id="ak" type="checkbox" name="jurusan[]" value="ak" {{ Auth::user()->jurusan == 'AK' ? 'checked disabled' : '' }}>
+                                <input class="custom-control-input" id="ak" type="checkbox" name="jurusan[]" value="AK" {{ Auth::user()->jurusan == 'AK' ? 'checked disabled' : '' }}>
                                 <label class="custom-control-label" for="ak">AK</label>
                             </div>
 
                             <div class="custom-control custom-control-inline custom-checkbox">
-                                <input class="custom-control-input" id="rpl" type="checkbox" name="jurusan[]" value="rpl" {{ Auth::user()->jurusan == 'RPL' ? 'checked disabled' : '' }}>
+                                <input class="custom-control-input" id="rpl" type="checkbox" name="jurusan[]" value="RPL" {{ Auth::user()->jurusan == 'RPL' ? 'checked disabled' : '' }}>
                                 <label class="custom-control-label" for="rpl">RPL</label>
                             </div>
 
                             <div class="custom-control custom-control-inline custom-checkbox">
-                                <input class="custom-control-input" id="tkj" type="checkbox" name="jurusan[]" value="tkj" {{ Auth::user()->jurusan == 'TKJ' ? 'checked disabled' : '' }}>
+                                <input class="custom-control-input" id="tkj" type="checkbox" name="jurusan[]" value="TKJ" {{ Auth::user()->jurusan == 'TKJ' ? 'checked disabled' : '' }}>
                                 <label class="custom-control-label" for="tkj">TKJ</label>
                             </div>
                         </div>
@@ -103,8 +103,8 @@
                 </div>
 
                 <div class="form-group mb-0 mt-3">
-                    <button type="submit" class="btn submitBtn">Ajukan</button>
-                    <button type="reset" class="btn resetBtn">Reset</button>
+                    <button type="submit" class="btn btn-primary">Ajukan</button>
+                    <button type="reset" class="btn btn-outline-primary">Reset</button>
                 </div>
             </form>
             <div class="col pt-3 pt-lg-0">

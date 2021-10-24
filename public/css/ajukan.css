@@ -28,32 +28,24 @@ textarea {
 	resize: none;
 }
 
-.submitBtn {
+.btn-primary {
 	background-color: var(--ctacolor);
+	border-color: var(--ctacolor);
 	color: var(--maincolor);
-	border-radius: 5px;
-	padding: 2% 3% 2% 3%;
-	font-weight: bold;
-	transition: 0.3s;
 }
 
-.submitBtn:hover {
+.btn-primary:hover {
+	border-color: var(--hovercta);
 	background-color: var(--hovercta);
-	color: var(--maincolor);
 }
 
-.resetBtn {
-	background-color: var(--maincolor);
-	border: 1px solid var(--ctacolor);
+.btn-outline-primary {
+	border-color: var(--ctacolor);
 	color: var(--ctacolor);
-	border-radius: 5px;
-	padding: 2% 3% 2% 3%;
-	margin-left: 2%;
-	font-weight: bold;
-	transition: 0.3s;
 }
 
-.resetBtn:hover {
+.btn-outline-primary:hover {
+	border-color: var(--ctacolor);
 	background-color: var(--ctacolor);
 	color: var(--maincolor);
 }

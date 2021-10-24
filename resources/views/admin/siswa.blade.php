@@ -2,7 +2,9 @@
 
 @push('script')
     <script src="{{ asset('js/datasiswa.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 @endpush
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -89,9 +91,9 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">Cari Siswa:</span>
                     </div>
-                    <input class="form-control" id="siswaCari" placeholder="NIS/Nama/Jenis Kelamin...">
+                    <input class="form-control" id="cari" placeholder="NIS/Nama/Jenis Kelamin...">
                 </div>
-                <small class="form-text text-muted mx-auto mb-1">Gunakan kutip (") untuk mencari lebih dari 2 kata</small>
+                <small class="form-text text-muted mx-auto mb-1">Gunakan garis | untuk mencari lebih dari 1 kata kunci</small>
                 <div class="card-body p-0" style="overflow-y: auto; height: 75vh">
                     <table class="table table-hover">
                         <thead>
@@ -106,7 +108,7 @@
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="siswaTabel">
+                        <tbody id="cariTabel">
                             @forelse ($datasiswa as $siswa)
                             <tr>
                                 <td>{{ $siswa->nis }}</td>

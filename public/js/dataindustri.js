@@ -87,29 +87,4 @@ $(document).ready(function () {
 			return false;
 		}
 	});
-
-	/*
-	 * Fitur cari industri
-	 */
-	$('#industriCari').on('keyup', function () {
-		if ($(this).val() === '') {
-			$('#industriTabel tr').show();
-			return;
-		}
-
-		let cari = $(this).val().toLowerCase().trim().match(/\w+|"[^"]+"|'[^']+'/g);
-
-		$('#industriTabel tr').each(function () {
-			let industri = $(this).text().toLowerCase();
-			let cocok = false;
-
-			cari.forEach(function (keyword) {
-				keyword = keyword.replace(/\'\"/g, '');
-				if (industri.indexOf(keyword) > -1) cocok = true;
-			});
-
-			$(this).toggle(cocok);
-		});
-	});
-
 });

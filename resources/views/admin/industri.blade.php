@@ -2,7 +2,9 @@
 
 @push('script')
     <script src="{{ asset('js/dataindustri.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 @endpush
+
 @section('content')
 <div class="modal" id="industriModal" tabindex="-1" role="dialog" aria-labelledby="dataIndustri" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -188,9 +190,9 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">Cari Industri:</span>
                     </div>
-                    <input class="form-control" id="industriCari" placeholder="Nama/Bidang/Alamat/Kontak...">
+                    <input class="form-control" id="cari" placeholder="Nama/Bidang/Alamat/Kontak...">
                 </div>
-                <small class="form-text text-muted mx-auto mb-1">Gunakan kutip (") untuk mencari lebih dari 2 kata</small>
+                <small class="form-text text-muted mx-auto mb-1">Gunakan garis | untuk mencari lebih dari 1 kata kunci</small>
                 <div class="card-body p-0" style="overflow-y: auto; height: 75vh">
                     <table class="table table-hover">
                         <thead>
@@ -205,7 +207,7 @@
                                 <th class="text-center">Tahun</th>
                             </tr>
                         </thead>
-                        <tbody id="industriTabel">
+                        <tbody id="cariTabel">
                             @forelse ($dataindustri as $industri)
                                 <tr class="{{ $industri->status ? '' : 'bg-warning' }}" role="button" data-toggle="modal" data-target="#dataIndustri" data-id="{{ $industri->id }}">
                                     <td>{{ $loop->index+1 }}</td>

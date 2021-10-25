@@ -26,14 +26,11 @@ class DataIndustriController extends Controller
 
     public function informasi($id)
     {
-        $dataindustri = Industri::find($id);
-        if ($dataindustri->nis_pengaju) {
-            $pengaju = Siswa::find($dataindustri->nis_pengaju);
-        }
+        $industri = Industri::find($id);
 
         return response()->json([
-            'industri' => $dataindustri,
-            'pengaju' => $pengaju ?? '',
+            'industri' => $industri,
+            'pengaju' => $industri->pengaju ?? '',
         ]);
     }
 

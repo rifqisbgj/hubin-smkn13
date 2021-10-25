@@ -20,8 +20,7 @@ class DataSiswaController extends Controller
 
     public function index()
     {
-        $datasiswa = Siswa::leftJoin('industri', 'industri.id', '=', 'siswa.id_industri')
-            ->get(['siswa.*', 'industri.nama AS industri']);
+        $datasiswa = Siswa::all();
 
         return view('admin.siswa')->with('datasiswa', $datasiswa);
     }

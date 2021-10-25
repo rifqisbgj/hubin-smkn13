@@ -26,7 +26,7 @@ class Industri extends Migration
 
             /* Pengajuan */
             /* TODO: Foreign key nis siswa? */
-            $table->unsignedInteger('nis_pengaju')->nullable();
+            $table->unsignedInteger('nis_pengaju')->nullable()->unique();
             $table->boolean('status')->default(true);
 
             /* Data Pembimbing */

@@ -117,7 +117,7 @@
                                 <td>{{ $siswa->jurusan }}</td>
                                 <td>{{ $siswa->kelas }}</td>
                                 <td>{{ $siswa->tahun }}</td>
-                                <td class="text-truncate">{{ $siswa->industri ?? 'Kosong' }}</td>
+                                <td class="text-truncate">{{ $siswa->industri->nama ?? 'Kosong' }}</td>
                                 <td class="text-center">
                                     <form class="d-inline" method="POST" action="{{ route('admin.siswa.edit') }}">
                                         @csrf

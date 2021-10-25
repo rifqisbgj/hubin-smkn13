@@ -24,4 +24,14 @@ class Industri extends Model
         'nama_pembimbing',
         'nip_pembimbing',
     ];
+
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'id_industri', 'id');
+    }
+
+    public function pengaju()
+    {
+        return $this->hasOne(Siswa::class, 'nis', 'nis_pengaju');
+    }
 }

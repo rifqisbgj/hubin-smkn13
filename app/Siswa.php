@@ -25,4 +25,9 @@ class Siswa extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function industri()
+    {
+        return $this->belongsTo(Industri::class, 'id_industri', 'id');
+    }
 }

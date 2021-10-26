@@ -9,3 +9,40 @@
     --important: #FA4659;
     --hovercta: #BC7EFB;
 }
+
+.ak {
+	background-color: var(--ak);
+	color: var(--maincolor);
+}
+
+.tkj {
+	background-color: var(--tkj);
+	color: var(--maincolor);
+}
+
+.rpl {
+	background-color: var(--rpl);
+	color: var(--maincolor);
+}
+
+.btn-primary {
+	background-color: var(--ctacolor);
+	border-color: var(--ctacolor);
+	color: var(--maincolor);
+}
+
+.btn-primary:hover {
+	border-color: var(--hovercta);
+	background-color: var(--hovercta);
+}
+
+.btn-outline-primary {
+	border-color: var(--ctacolor);
+	color: var(--ctacolor);
+}
+
+.btn-outline-primary:hover {
+	border-color: var(--ctacolor);
+	background-color: var(--ctacolor);
+	color: var(--maincolor);
+}

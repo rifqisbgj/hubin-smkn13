@@ -1,0 +1,19 @@
+body {
+	font-family: 'Montserrat', sans-serif;
+	background-color: var(--maincolor);
+	color: var(--maintext);
+}
+
+header h1 {
+	color: var(--secondarycolor);
+}
+
+tr td {
+	vertical-align: middle!important;
+}
+
+.avatar {
+	width: 2em;
+	height: 2em;
+	color: var(--maincolor);
+}

@@ -28,7 +28,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Pilih Industri</h5>
                                 Pilih industri untuk prakerin
-                                <a href="#" class="stretched-link"></a>
+                                <a href="{{ route('siswa.pilih') }}" class="stretched-link"></a>
                             </div>
                         </div>
                         <div class="card btn btn-warning">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Industri;
 use App\Siswa;
 
 class SiswaController extends Controller
@@ -49,5 +50,17 @@ class SiswaController extends Controller
         }
 
         return back();
+    }
+
+    public function pilih()
+    {
+        // TODO: Hanya ambil yang kuotanya masih kosong
+        $dataindustri = Industri::withCount('siswa')
+            ->toBase()
+            ->where('jurusan', 'like', '%'.Auth::user()->jurusan.'%')
+            ->orderBy('siswa_count')
+            ->get();
+
+        return view('siswa.pilih')->with('dataindustri', $dataindustri);
     }
 }

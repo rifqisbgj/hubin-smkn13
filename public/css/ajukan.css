@@ -7,7 +7,7 @@ main {
 header h1 {
 	font-weight: bolder;
 	margin: 5% 0 5% 2%;
-
+	color: var(--secondarycolor);
 }
 
 .form-group, .form-check {
@@ -26,26 +26,4 @@ input[type="checkbox"]:checked + label::after {
 
 textarea {
 	resize: none;
-}
-
-.btn-primary {
-	background-color: var(--ctacolor);
-	border-color: var(--ctacolor);
-	color: var(--maincolor);
-}
-
-.btn-primary:hover {
-	border-color: var(--hovercta);
-	background-color: var(--hovercta);
-}
-
-.btn-outline-primary {
-	border-color: var(--ctacolor);
-	color: var(--ctacolor);
-}
-
-.btn-outline-primary:hover {
-	border-color: var(--ctacolor);
-	background-color: var(--ctacolor);
-	color: var(--maincolor);
 }

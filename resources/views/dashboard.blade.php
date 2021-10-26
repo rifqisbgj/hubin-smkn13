@@ -65,20 +65,19 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth('siswa')
-                        <a href="{{ route('siswa.home') }}">Home Siswa</a>
-                    @else
-                        <a href="{{ route('siswa.login') }}">Login Siswa</a>
-                    @endauth
-                    @auth('admin')
-                        <a href="{{ route('admin.home') }}">Home Admin</a>
-                    @else
-                        <a href="{{ route('admin.login') }}">Login Admin</a>
-                    @endauth
-                </div>
-            @endif
+            <div class="top-right links">
+                <a href="{{ route('pemetaan') }}">Lihat Hasil Pemetaan</a>
+                @auth('siswa')
+                    <a href="{{ route('siswa.home') }}">Home Siswa</a>
+                @else
+                    <a href="{{ route('siswa.login') }}">Login Siswa</a>
+                @endauth
+                @auth('admin')
+                    <a href="{{ route('admin.home') }}">Home Admin</a>
+                @else
+                    <a href="{{ route('admin.login') }}">Login Admin</a>
+                @endauth
+            </div>
 
             <div class="content">
                 <div class="title m-b-md">

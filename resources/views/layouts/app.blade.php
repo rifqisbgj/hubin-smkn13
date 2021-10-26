@@ -44,10 +44,13 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('pemetaan') }}">Hasil Pemetaan</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('tentang') }}">Tentang</a>
                         </li>
+                        <!-- Authentication Links -->
                         @if(Auth::getDefaultDriver())
                             @if(Auth::guard('admin')->check())
                                 <li class="nav-item">
@@ -66,13 +69,6 @@
                             @if(Auth::guard('siswa')->check())
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('siswa.home') }}">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="">Lihat Data Pemetaan</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="">Hasil Data Pemetaan</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('siswa.pengaturan') }}">Pengaturan Akun</a>

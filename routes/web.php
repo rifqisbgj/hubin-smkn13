@@ -13,13 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'dashboard')->name('home');
-Route::view('/tentang', 'tentang')->name('tentang');
-
 Auth::routes([
     'register' => false,
     'reset' => false,
 ]);
+
+/* Route: /
+ */
+Route::view('/', 'dashboard')->name('home');
+Route::view('/tentang', 'tentang')->name('tentang');
+
+Route::get('/pemetaan', 'PemetaanController@index')->name('pemetaan');
 
 /* Nama Route: siswa
  * URL Route: /siswa/

@@ -64,6 +64,18 @@ $(document).ready(function () {
 				$('#industriTerimaAjuan').prop('checked', true);
 			}
 
+			if (data.siswa.length) {
+				$('#industriSiswa').empty();
+				data.siswa.forEach(function (siswa) {
+					const nis = siswa.nis;
+					const nama = siswa.nama;
+					$('#industriSiswa').append(`<li>${nama} (${nis})</li>`);
+				});
+			} else {
+				$('#industriSiswa').empty();
+				$('#industriSiswa').append('<li>Tidak ada siswa masuk</li>');
+			}
+
 			$('#industriNama').focus();
 		});
 

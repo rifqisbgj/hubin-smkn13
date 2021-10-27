@@ -57,16 +57,19 @@
                                 </div>
                                 <div class="col">
                                     <label class="form-label">Tahun</label>
-                                    <input class="form-control form-control-sm" id="industriTahun" name="tahun" type="number" min="2020" max="{{ date("Y") }}" value="{{ old() ? old('tahun') : date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
+                                    <input class="form-control form-control-sm" id="industriTahun" name="tahun" type="number" max="{{ date("Y") }}" value="{{ old('tahun') ?? date("Y") }}" required>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-header">Data Pengaju dan Pembimbing</div>
+                        <div class="card-header">Data Siswa dan Pembimbing</div>
                         <div class="card-body">
                             <input id="industriPengaju" type="hidden" name="nis_pengaju">
                             <div class="pb-2" id="industriPengajuTeks"></div>
+                            <ul class="mb-2" id="industriSiswa">
+                                <li>Tidak ada siswa yang masuk</li>
+                            </ul>
                             <div class="pb-2">
                                 <small class="text-muted" id="industriStatus"></small>
                             </div>
@@ -168,7 +171,7 @@
                             </div>
                             <div class="col">
                                 <label class="form-label">Tahun</label>
-                                <input class="form-control form-control-sm" name="tahun" type="number" value="{{ old('tahun') ?? date("Y") }}" onKeyPress="if(this.value.length>=4) return false" required>
+                                <input class="form-control form-control-sm" name="tahun" type="number" max="{{ date("Y") }}" value="{{ old('tahun') ?? date("Y") }}" required>
                             </div>
                         </div>
                         <div class="form-group form-row">
@@ -209,18 +212,27 @@
                         </thead>
                         <tbody id="cariTabel">
                             @forelse ($dataindustri as $industri)
-                                <tr class="{{ $industri->status ? '' : 'bg-warning' }}" role="button" data-toggle="modal" data-target="#dataIndustri" data-id="{{ $industri->id }}">
+                                <tr class="{{ $industri->siswa_count > 0 && !($industri->status && ($industri->nama_pembimbing || $industri->nip_pembimbing)) ? 'bg-warning' : ''}}"
+                                    role="button" data-toggle="modal" data-target="#dataIndustri" data-id="{{ $industri->id }}">
                                     <td>{{ $loop->index+1 }}</td>
                                     <td>{{ $industri->nama }}</td>
                                     <td>{{ $industri->bidang }}</td>
                                     <td class="text-center industriTabelJurusan">
-                                        {!! strpos($industri->jurusan, 'AK') !== false ? '<span class="badge badge-info">AK</span>' : '' !!}
-                                        {!! strpos($industri->jurusan, 'RPL') !== false ? '<span class="badge badge-secondary">RPL</span>' : '' !!}
-                                        {!! strpos($industri->jurusan, 'TKJ') !== false ? '<span class="badge badge-dark">TKJ</span>' : '' !!}
+                                        @if(strstr($industri->jurusan, 'AK'))
+                                            <span class="badge badge-info">AK</span>
+                                        @endif
+                                        @if(strstr($industri->jurusan, 'RPL'))
+                                            <span class="badge badge-secondary">RPL</span>
+                                        @endif
+                                        @if(strstr($industri->jurusan, 'TKJ'))
+                                            <span class="badge badge-dark">TKJ</span>
+                                        @endif
                                     </td>
                                     <td>{{ $industri->alamat }}</td>
                                     <td>{{ $industri->kontak }}</td>
-                                    <td class="text-center">{{ $industri->kuota }}</td>
+                                    <td class="text-center {{ $industri->siswa_count == $industri->kuota ? 'text-danger' : '' }}">
+                                        {{ "$industri->siswa_count/$industri->kuota" }}
+                                    </td>
                                     <td class="text-center">{{ $industri->tahun }}</td>
                                 </tr>
                             @empty
@@ -231,6 +243,9 @@
                         </tbody>
                     </table>
                 </div>
+                <small class="text-muted text-center p-2">
+                    Baris berwarna kuning berarti industri belum memiliki pembimbing atau industri ajuan belum diterima
+                </small>
                 <hr class="m-0" />
                 <div class="card-body">
                     <form class="form-row" method="POST" action="{{ route('admin.industri.upload') }}" enctype="multipart/form-data">

@@ -19,7 +19,9 @@ class DataIndustriController extends Controller
 
     public function index()
     {
-        $dataindustri = Industri::toBase()->get();
+        $dataindustri = Industri::withCount('siswa')
+            ->toBase()
+            ->get();
 
         return view('admin.industri')->with('dataindustri', $dataindustri);
     }
@@ -31,6 +33,7 @@ class DataIndustriController extends Controller
         return response()->json([
             'industri' => $industri,
             'pengaju' => $industri->pengaju ?? '',
+            'siswa' => $industri->siswa ?? '',
         ]);
     }
 

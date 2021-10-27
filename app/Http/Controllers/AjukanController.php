@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Industri;
@@ -17,6 +18,11 @@ class AjukanController extends Controller
 
     public function index()
     {
+        // JIka sudah masuk tidak boleh mengajukan
+        if (Auth::user()->id_industri) {
+            return back();
+        }
+
         return view('siswa.ajukan');
     }
 

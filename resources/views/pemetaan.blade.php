@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('script')
-    <script src="https://kit.fontawesome.com/91b3159b57.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/kit.fontawesome.91b3159b57.js') }}"></script>
     <script src="{{ asset('js/pilih.js') }}"></script>
     <script src="{{ asset('js/search.js') }}"></script>
 @endpush

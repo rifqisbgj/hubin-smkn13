@@ -54,6 +54,11 @@ class SiswaController extends Controller
 
     public function pilih()
     {
+        // Jika siswa sudah masuk, jangan pilih lagi
+        if (Auth::user()->id_industri) {
+            return back();
+        }
+
         // TODO: Hanya ambil yang kuotanya masih kosong
         $dataindustri = Industri::withCount('siswa')
             ->toBase()

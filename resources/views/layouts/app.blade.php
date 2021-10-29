@@ -16,13 +16,13 @@
     @stack('script')
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="//fonts.gstatic.com" rel="stylesheet">
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">-->
 
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/lightmode.css') }}" rel="stylesheet">
     @stack('style')
 </head>
 <body>

@@ -7,7 +7,6 @@
 @endpush
 
 @push('style')
-    <link rel="stylesheet" href="{{ asset('css/lightmode.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pilih.css') }}">
 @endpush
 

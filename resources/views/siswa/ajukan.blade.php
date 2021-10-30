@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Pengajuan Industri')
+
 @push('script')
     <script src="{{ asset('js/ajukan.js') }}"></script>
 @endpush
@@ -10,13 +12,10 @@
 
 @section('content')
     <main class="container">
-        <div class="row">
-            <div class="col pl-auto pl-md-5 pb-2">
-                <h1>Ajukan Industri</h1>
-            </div>
-        </div>
         <div class="row row-cols-1 row-cols-sm-2 justify-content-center">
             <form class="col col-md-5" method="POST" action="{{ route('siswa.ajukan.submit') }}">
+                <h1>Ajukan Industri</h1>
+
                 @if($errors->any())
                     <div class="alert alert-danger">
                         @foreach ($errors->all() as $error)

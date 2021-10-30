@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Data Siswa')
+
 @push('script')
     <script src="{{ asset('js/datasiswa.js') }}"></script>
     <script src="{{ asset('js/search.js') }}"></script>

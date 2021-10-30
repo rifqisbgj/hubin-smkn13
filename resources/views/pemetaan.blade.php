@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Pemetaan')
+
 @push('script')
     <script src="{{ asset('js/kit.fontawesome.91b3159b57.js') }}"></script>
     <script src="{{ asset('js/pilih.js') }}"></script>

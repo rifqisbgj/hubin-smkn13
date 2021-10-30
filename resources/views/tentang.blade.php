@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Tentang')
+
 @push('script')
     <script src="https://kit.fontawesome.com/91b3159b57.js" crossorigin="anonymous"></script>
 @endpush

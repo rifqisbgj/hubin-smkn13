@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title') | {{ config('app.name', 'Hubin 13') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>

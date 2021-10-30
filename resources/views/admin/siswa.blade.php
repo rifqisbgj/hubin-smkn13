@@ -93,7 +93,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">Cari Siswa:</span>
                     </div>
-                    <input class="form-control" id="cari" placeholder="NIS/Nama/Jenis Kelamin...">
+                    <input class="form-control" id="cari" value="{{ Request::get('cari') }}" placeholder="NIS/Nama/Jenis Kelamin...">
                 </div>
                 <small class="form-text text-muted mx-auto mb-1">Gunakan garis | untuk mencari lebih dari 1 kata kunci</small>
                 <div class="card-body p-0" style="overflow-y: auto; height: 75vh">
@@ -119,7 +119,15 @@
                                 <td>{{ $siswa->jurusan }}</td>
                                 <td>{{ $siswa->kelas }}</td>
                                 <td>{{ $siswa->tahun }}</td>
-                                <td class="text-truncate">{{ $siswa->industri->nama ?? 'Kosong' }}</td>
+                                <td class="text-truncate">
+                                    @if($siswa->industri)
+                                        <a class="text-success" href="industri?cari={{ $siswa->industri->nama }}">
+                                            {{ $siswa->industri->nama }}
+                                        </a>
+                                    @else
+                                        <span class="text-danger">Kosong</span>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     <form class="d-inline" method="POST" action="{{ route('admin.siswa.edit') }}">
                                         @csrf

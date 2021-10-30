@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	// Cek parameter get
+	const url = new URLSearchParams(window.location.search);
+
 	// Simpan data dalam tabel untuk dicari
 	const tabel = $('#cariTabel tr');
 	const data = {};
@@ -7,13 +10,13 @@ $(document).ready(function() {
 			.replaceAll('\n', '').replaceAll('  ', '');
 	});
 
-	$('#cari').on('keyup', function () {
-		if ($(this).val() === '') {
+	function cari() {
+		if ($('#cari').val() === '') {
 			$('#cariTabel tr').show();
 			return;
 		}
 
-		const cari = $(this).val().toLowerCase().trim();
+		const cari = $('#cari').val().toLowerCase().trim();
 		const regex = new RegExp(cari, "g")
 
 		for (let index in data) {
@@ -23,5 +26,11 @@ $(document).ready(function() {
 				$(tabel).eq(index).toggle(false);
 			}
 		}
-	});
+	}
+
+	$('#cari').on('keyup', cari);
+
+	if (url.has('cari')) {
+		cari();
+	}
 });

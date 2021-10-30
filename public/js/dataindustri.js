@@ -69,11 +69,11 @@ $(document).ready(function () {
 				data.siswa.forEach(function (siswa) {
 					const nis = siswa.nis;
 					const nama = siswa.nama;
-					$('#industriSiswa').append(`<li>${nama} (${nis})</li>`);
+					$('#industriSiswa').append($(`<a class="text-success" href='siswa?cari=${nama}'>${nama} (${nis})</a>`));
 				});
 			} else {
 				$('#industriSiswa').empty();
-				$('#industriSiswa').append('<li>Tidak ada siswa masuk</li>');
+				$('#industriSiswa').append($('<span class="text-danger">Tidak ada siswa masuk</span>'));
 			}
 
 			$('#industriNama').focus();

@@ -69,16 +69,14 @@
                         <div class="card-body">
                             <input id="industriPengaju" type="hidden" name="nis_pengaju">
                             <div class="pb-2" id="industriPengajuTeks"></div>
-                            <ul class="mb-2" id="industriSiswa">
-                                <li>Tidak ada siswa yang masuk</li>
-                            </ul>
+                            <div class="pb-2 d-flex flex-column" id="industriSiswa">
+                            </div>
                             <div class="pb-2">
                                 <small class="text-muted" id="industriStatus"></small>
                             </div>
                             <div class="custom-control custom-switch">
-                                    <input class="custom-control-input" id="industriTerimaAjuan" type="checkbox" name="status">
-                                <label class="custom-control-label" for="industriTerimaAjuan">Terima Ajuan Industri
-                                </label>
+                                <input class="custom-control-input" id="industriTerimaAjuan" type="checkbox" name="status">
+                                <label class="custom-control-label" for="industriTerimaAjuan">Terima Ajuan Industri</label>
                             </div>
                             <hr />
                             <div class="form-group">
@@ -195,7 +193,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">Cari Industri:</span>
                     </div>
-                    <input class="form-control" id="cari" placeholder="Nama/Bidang/Alamat/Kontak...">
+                    <input class="form-control" id="cari" value="{{ Request::get('cari') }}" placeholder="Nama/Bidang/Alamat/Kontak...">
                 </div>
                 <small class="form-text text-muted mx-auto mb-1">Gunakan garis | untuk mencari lebih dari 1 kata kunci</small>
                 <div class="card-body p-0" style="overflow-y: auto; height: 75vh">
@@ -221,18 +219,18 @@
                                     <td>{{ $industri->bidang }}</td>
                                     <td class="text-center industriTabelJurusan">
                                         @if(strstr($industri->jurusan, 'AK'))
-                                            <span class="badge badge-info">AK</span>
+                                            <span class="badge ak">AK</span>
                                         @endif
                                         @if(strstr($industri->jurusan, 'RPL'))
-                                            <span class="badge badge-secondary">RPL</span>
+                                            <span class="badge rpl">RPL</span>
                                         @endif
                                         @if(strstr($industri->jurusan, 'TKJ'))
-                                            <span class="badge badge-dark">TKJ</span>
+                                            <span class="badge tkj">TKJ</span>
                                         @endif
                                     </td>
                                     <td>{{ $industri->alamat }}</td>
                                     <td>{{ $industri->kontak }}</td>
-                                    <td class="text-center {{ $industri->siswa_count == $industri->kuota ? 'text-danger' : '' }}">
+                                    <td class="text-center {{ $industri->siswa_count == $industri->kuota ? 'text-success' : 'text-danger' }}">
                                         {{ "$industri->siswa_count/$industri->kuota" }}
                                     </td>
                                     <td class="text-center">{{ $industri->tahun }}</td>

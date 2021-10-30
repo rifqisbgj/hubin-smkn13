@@ -19,7 +19,7 @@
                             </div>
                         @endif
 
-                        @if($errors->password)
+                        @if($errors->any())
                             <div class="alert alert-danger" role="alert">
                                 <strong>Password salah!</strong>
                             </div>
@@ -40,7 +40,7 @@
                                 <input id="password_old" type="password" class="form-control" name="password_old" required>
                             </div>
                         </div>
- 
+
                         <input type="hidden" name="remember" id="remember" value="{{ Auth::user()->remember_token ? 'true' : 'false' }}">
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">

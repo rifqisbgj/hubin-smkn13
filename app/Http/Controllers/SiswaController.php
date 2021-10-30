@@ -37,19 +37,15 @@ class SiswaController extends Controller
             'password_old' => 'password:siswa',
         ]);
 
-        $affected = Siswa::where('nis', Auth::user()->nis)
+        Siswa::where('nis', Auth::user()->nis)
             ->update([
                 'password' => Hash::make($request->password),
             ]);
 
-        if ($affected) {
-            Auth::guard('siswa')->logout();
-            Auth::guard('siswa')->attempt($credentials, $request->remember);
+        Auth::guard('siswa')->logout();
+        Auth::guard('siswa')->attempt($credentials, $request->remember);
 
-            return back()->with('status', true);
-        }
-
-        return back();
+        return back()->with('status', true);
     }
 
     public function pilih()

@@ -34,19 +34,15 @@ class AdminController extends Controller
             'password_old' => 'password:admin',
         ]);
 
-        $affected = Admin::where('username', Auth::user()->username)
+        Admin::where('username', Auth::user()->username)
             ->update([
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
             ]);
 
-        if ($affected) {
-            Auth::guard('admin')->logout();
-            Auth::guard('admin')->attempt($credentials, $request->remember);
+        Auth::guard('admin')->logout();
+        Auth::guard('admin')->attempt($credentials, $request->remember);
 
-            return redirect()->back()->with('status', true);
-        }
-
-        return redirect()->back()->withInput($credentials);
+        return back()->with('status', true);
     }
 }

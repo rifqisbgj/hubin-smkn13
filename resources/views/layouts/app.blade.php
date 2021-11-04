@@ -37,32 +37,32 @@
 				</button>
 			</div>
 			<div class="p-4 pt-5">
-                <h2>
+                <h3>
                     <img src="{{ asset('img/smkn13bandung.png') }}" alt="Logo SMKN 13 Bandung" width="40" height="40">
                     <a class="text-white" href="{{ route('home') }}"><b>HUBIN-13</b></a>
-                </h2>
+                </h3>
                 <ul class="list-unstyled mt-3">
-					<li class="active">
+					<li {{ Route::currentRouteName() === 'home' ? 'class=active' : '' }}>
 						<a href="{{ route('home') }}"><i class="fa fa-home"></i>Home</a>
 					</li>
 					<li>
                         <a href="#"><i class="fa fa-eye"></i>Lihat Data Pemetaan</a>
 					</li>
-					<li>
+					<li {{ Route::currentRouteName() === 'pemetaan' ? 'class=active' : '' }}>
                         <a href="{{ route('pemetaan') }}"><i class="fa fa-check"></i>Hasil Data Pemetaan</a>
 					</li>
                     @if(Auth::getDefaultDriver() === 'admin')
-                        <li>
+                        <li {{ Route::currentRouteName() === 'admin.siswa.data' ? 'class=active' : '' }}>
                             <a href="{{ route('admin.siswa.data') }}"><i class="fa fa-users"></i>Data Siswa</a>
                         </li>
-                        <li>
+                        <li {{ Route::currentRouteName() === 'admin.industri.data' ? 'class=active' : '' }}>
                             <a href="{{ route('admin.industri.data') }}"><i class="fa fa-industry"></i>Data Industri</a>
                         </li>
                     @elseif(Auth::getDefaultDriver() === 'siswa')
-                        <li>
+                        <li {{ Route::currentRouteName() === 'siswa.ajukan' ? 'class=active' : '' }}>
                             <a href="{{ route('siswa.ajukan') }}"><i class="fa fa-paper-plane"></i>Ajukan Industri</a>
                         </li>
-                        <li>
+                        <li {{ Route::currentRouteName() === 'siswa.pilih' ? 'class=active' : '' }}>
                             <a href="{{ route('siswa.pilih') }}"><i class="fa fa-list"></i>Pilih Industri</a>
                         </li>
                     @endif
@@ -70,11 +70,11 @@
 						<hr class="hr">
 					</li>
                     @auth
-                        <li>
+                        <li {{ Route::currentRouteName() === Auth::getDefaultDriver() . '.pengaturan' ? 'class=active' : '' }}>
                             <a href="{{ route(Auth::getDefaultDriver() . '.pengaturan') }}"><i class="fa fa-cogs"></i>Pengaturan</a>
                         </li>
                     @endauth
-					<li>
+					<li {{ Route::currentRouteName() === 'tentang' ? 'class=active' : '' }}>
 						<a href="{{ route('tentang') }}"><i class="fa fa-comments"></i>Tentang</a>
 					</li>
 				</ul>
@@ -93,7 +93,7 @@
             </div>
         </nav>
 
-        <main class="py-5">
+        <main class="py-5" id="main">
             @yield('content')
         </main>
     </div>

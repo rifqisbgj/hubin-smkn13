@@ -20,18 +20,17 @@ Auth::routes([
 
 /* Route: /
  */
-Route::view('/', 'dashboard')->name('home');
 Route::view('/tentang', 'tentang')->name('tentang');
 
 Route::get('/pemetaan', 'PemetaanController@index')->name('pemetaan');
 
 /* Nama Route: siswa
- * URL Route: /siswa/
+ * URL Route: /
  */
-Route::prefix('siswa')->name('siswa.')->group(function () {
+Route::name('siswa.')->group(function () {
     Route::get('/', 'SiswaController@index')->name('home');
 
-    Route::get('/login', 'SiswaLoginController@loginForm')->name('login');
+    Route::get('/login', 'SiswaLoginController@index')->name('login');
     Route::post('/login', 'SiswaLoginController@login')->name('login.submit');
     Route::get('/logout', 'SiswaLoginController@logout')->name('logout');
 

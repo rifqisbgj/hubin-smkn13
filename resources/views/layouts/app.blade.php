@@ -39,11 +39,11 @@
 			<div class="p-4 pt-5">
                 <h3>
                     <img src="{{ asset('img/smkn13bandung.png') }}" alt="Logo SMKN 13 Bandung" width="40" height="40">
-                    <a class="text-white" href="{{ route('home') }}"><b>HUBIN-13</b></a>
+                    <a class="text-white" href="{{ route('siswa.home') }}"><b>HUBIN-13</b></a>
                 </h3>
                 <ul class="list-unstyled mt-3">
-					<li {{ Route::currentRouteName() === 'home' ? 'class=active' : '' }}>
-						<a href="{{ route('home') }}"><i class="fa fa-home"></i>Home</a>
+					<li {{ Route::currentRouteName() === 'siswa.home' ? 'class=active' : '' }}>
+						<a href="{{ route('siswa.home') }}"><i class="fa fa-home"></i>Home</a>
 					</li>
 					<li>
                         <a href="#"><i class="fa fa-eye"></i>Lihat Data Pemetaan</a>
@@ -58,7 +58,7 @@
                         <li {{ Route::currentRouteName() === 'admin.industri.data' ? 'class=active' : '' }}>
                             <a href="{{ route('admin.industri.data') }}"><i class="fa fa-industry"></i>Data Industri</a>
                         </li>
-                    @elseif(Auth::getDefaultDriver() === 'siswa')
+                    @elseif(Auth::getDefaultDriver() === 'siswa' && !Auth::user()->id_industri)
                         <li {{ Route::currentRouteName() === 'siswa.ajukan' ? 'class=active' : '' }}>
                             <a href="{{ route('siswa.ajukan') }}"><i class="fa fa-paper-plane"></i>Ajukan Industri</a>
                         </li>

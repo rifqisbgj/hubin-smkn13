@@ -1,0 +1,381 @@
+#main {
+	padding: 0!important;
+}
+
+#content {
+	font-family: 'Montserrat', sans-serif;
+	width: 100%;
+	padding: 0;
+	min-height: 100vh;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	background: #201A38 !important;
+	transition: all 0.3s;
+}
+
+.konten {
+	overflow-y: auto;
+}
+
+.konten .container .container-content .det-indust {
+	font-weight: bold;
+	font-size: 64px;
+	line-height: 78px;
+	color: white;
+}
+
+.konten .container .container-content .detail-industri .card {
+	position: relative;
+	background: #332F42;
+	-webkit-box-shadow: 8px 8px 24px rgba(255, 255, 255, 0.25);
+	box-shadow: 8px 8px 24px rgba(255, 255, 255, 0.25);
+	border-radius: 10px;
+	margin-top: 22px;
+}
+
+.konten .container .container-content .detail-industri .card .card-body {
+	border-left: 9px solid #7FE27C;
+	border-radius: 10px;
+}
+
+.konten .container .container-content .detail-industri .card .card-body .perusahaan-kuota hr {
+	width: 98%;
+	border: 1px solid white;
+}
+
+.konten .container .container-content .detail-industri .card .card-body .perusahaan-kuota .nama-pt {
+	font-style: normal;
+	font-weight: bold;
+	font-size: 38px;
+	color: #7FE27C;
+}
+
+.konten .container .container-content .detail-industri .card .card-body .perusahaan-kuota .kuota {
+	font-weight: 500;
+	font-size: 18px;
+	color: white;
+}
+
+.konten .container .container-content .detail-industri .card .card-body .alamat,
+.konten .container .container-content .detail-industri .card .card-body .bidang-usaha,
+.konten .container .container-content .detail-industri .card .card-body .persyaratan,
+.konten .container .container-content .detail-industri .card .card-body .siswa-terdaftar {
+	color: white;
+}
+
+.konten .container .container-content .detail-industri .card .card-body .alamat h2,
+.konten .container .container-content .detail-industri .card .card-body .bidang-usaha h2,
+.konten .container .container-content .detail-industri .card .card-body .persyaratan h2,
+.konten .container .container-content .detail-industri .card .card-body .siswa-terdaftar h2 {
+	font-weight: bold;
+	font-size: 28px;
+}
+
+.konten .container .container-content .detail-industri .card .card-body .alamat p,
+.konten .container .container-content .detail-industri .card .card-body .bidang-usaha p,
+.konten .container .container-content .detail-industri .card .card-body .persyaratan p,
+.konten .container .container-content .detail-industri .card .card-body .siswa-terdaftar p {
+	margin-top: -7px;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 29px;
+}
+
+.konten .container .container-content .detail-industri .card .card-body .persyaratan h3,
+.konten .container .container-content .detail-industri .card .card-body .persyaratan p {
+	color: red !important;
+}
+
+.konten .container .container-content .detail-industri .card .card-body .btn-kembali {
+	border: 1px solid #CA96FF;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 6px;
+	color: #CA96FF;
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 29px;
+	text-align: center;
+	padding: 8px 59px;
+}
+
+.konten .container .container-content .detail-industri .card .card-body .btn-kembali:hover {
+	background: #CA96FF;
+	color: #201A38;
+}
+
+.konten .container .container-content h3,
+.konten .container .container-content .pki,
+.konten .container .container-content .smkn {
+	color: white;
+}
+
+.konten .container .container-content .pki {
+	margin-top: 70px;
+	font-size: 64px;
+}
+
+.konten .container .container-content .smkn {
+	margin-top: -20px;
+	font-size: 55px;
+}
+
+.konten .container .container-content .ineu {
+	margin-top: 50px;
+}
+
+.konten .container .container-content .btn-login {
+	margin-top: 20px;
+	font-size: 24px;
+	padding: 5px 15px;
+	background: #6749b9;
+	color: white;
+}
+
+.konten .container .container-content .btn-login:hover {
+	background: #d6aeff;
+	color: white;
+}
+
+.konten .container .container-content .hr {
+	border: 1px solid #CA96FF;
+}
+
+.konten .container .container-content .kartu {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 20px !important;
+	margin-top: 48px;
+}
+
+.konten .container .container-content .kartu .card {
+	overflow: hidden;
+	height: -webkit-fit-content;
+	height: -moz-fit-content;
+	height: fit-content;
+}
+
+.konten .container .container-content .kartu .card .card-ajukan {
+	background: linear-gradient(135.46deg, #CA96FF 0%, #FFB000 145.01%);
+}
+
+.konten .container .container-content .kartu .card .card-pilihindus {
+	background: linear-gradient(134.86deg, #CA96FF 0%, #4AF5F4 139.83%);
+}
+
+.konten .container .container-content .kartu .card .card-hubadmin {
+	background: linear-gradient(134.82deg, #CA96FF 0%, #F7B3AF 135.08%);
+}
+
+.konten .container .container-content .kartu .card .card-body {
+	height: 300px;
+	color: #2D254B !important;
+}
+
+.konten .container .container-content .kartu .card .card-body .gambar {
+	height: 96px;
+	width: 96px;
+}
+
+.konten .container .container-content .kartu .card .card-body .judul {
+	font-weight: 600;
+	font-size: 24px;
+}
+
+.konten .container .container-content .kartu .card .card-body .deskripsi {
+	font-weight: normal;
+	font-size: 19px;
+}
+
+.btn.btn-primary {
+	background: #866ec7;
+	border-color: #866ec7;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus {
+	background: #d6aeff !important;
+	border-color: #d6aeff !important;
+}
+
+.footer p {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.form-control {
+	height: 40px !important;
+	background: #fff;
+	color: #000;
+	font-size: 13px;
+	border-radius: 4px;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	border: transparent;
+}
+
+.form-control:focus,
+.form-control:active {
+	border-color: #000;
+}
+
+.form-control::-webkit-input-placeholder {
+	/* Chrome/Opera/Safari */
+	color: rgba(0, 0, 0, 0.3);
+}
+
+.form-control::-moz-placeholder {
+	/* Firefox 19+ */
+	color: rgba(0, 0, 0, 0.3);
+}
+
+.form-control:-ms-input-placeholder {
+	/* IE 0+ */
+	color: rgba(0, 0, 0, 0.3);
+}
+
+.form-control:-moz-placeholder {
+	/* Firefox 18- */
+	color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-content {
+	border: none;
+	border-radius: 10px;
+	position: relative;
+	padding: 0 !important;
+	font-size: 14px;
+	border-radius: 0;
+	-webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+	box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+}
+
+.modal-content .tulisan-login {
+	margin-bottom: 10px;
+}
+
+.modal-content .tulisan-login h4 {
+	font-weight: 400;
+	font-size: 24px;
+}
+
+.modal-content .tulisan-login hr {
+	border: 1px solid #CA96FF;
+}
+
+.modal-content .btn-primary {
+	height: 35px;
+	margin-bottom: -40px;
+}
+
+.modal-content .btn-primary:hover {
+	background: #d6aeff !important;
+	border-color: #d6aeff !important;
+}
+
+.modal-content .image-modal {
+	width: 100%;
+	margin-bottom: -241px;
+}
+
+.modal-content .expand {
+	margin-top: -110px;
+}
+
+.modal-content .expand h1 {
+	font-weight: bold;
+	font-size: 40px;
+	line-height: 63px;
+	margin: 0;
+	color: #2D254B;
+}
+
+.modal-content .expand .exper {
+	margin-top: -20px;
+}
+
+.modal-content .modal-header {
+	padding: 0;
+	border: none;
+}
+
+.modal-content button.close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0;
+	margin: 0;
+	width: 40px;
+	height: 40px;
+	z-index: 1;
+	text-shadow: none;
+	background: rgba(0, 0, 0, 0.1);
+	color: #fff;
+}
+
+.modal-content .modal-body {
+	border: none;
+	position: relative;
+	z-index: 0;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.modal-content .modal-body.color-1 {
+	background: #CA96FF;
+}
+
+.modal-content .modal-body.color-2 {
+	background: #12073D;
+}
+
+.modal-content .modal-body .icon span {
+	font-size: 10vw;
+	line-height: 1;
+}
+
+@media (max-width: 767.98px) {
+	.modal-content .modal-body .icon span {
+		font-size: 100px;
+	}
+}
+
+.modal-content .modal-body .icon-2 {
+	position: absolute;
+	top: 0;
+	left: 20px;
+	font-size: 30px;
+}
+
+.modal-content .modal-body a:hover {
+	color: #d6aeff;
+}
+
+.modal-content .label {
+	text-transform: uppercase;
+	font-size: 12px;
+	letter-spacing: 1px;
+}
+
+.modal-content .form-control {
+	border: 5px;
+}
+
+.modal-content .form-control::-webkit-input-placeholder {
+	/* Chrome/Opera/Safari */
+	color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.modal-content .form-control::-moz-placeholder {
+	/* Firefox 19+ */
+	color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.modal-content .form-control:-ms-input-placeholder {
+	/* IE 10+ */
+	color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.modal-content .form-control:-moz-placeholder {
+	/* Firefox 18- */
+	color: rgba(255, 255, 255, 0.2) !important;
+}
+/*# sourceMappingURL=style.css.map */

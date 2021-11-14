@@ -12,9 +12,9 @@ class SiswaLoginController extends Controller
         $this->middleware('guest:siswa', ['except' => 'logout']);
     }
 
-    public function loginForm()
+    public function index()
     {
-        return view('siswa.login');
+        return view('home');
     }
 
     public function login(Request $request)

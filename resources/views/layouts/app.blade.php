@@ -58,7 +58,7 @@
                         <li {{ Route::currentRouteName() === 'admin.industri.data' ? 'class=active' : '' }}>
                             <a href="{{ route('admin.industri.data') }}"><i class="fa fa-industry"></i>Data Industri</a>
                         </li>
-                    @elseif(Auth::getDefaultDriver() === 'siswa' && !Auth::user()->id_industri)
+                    @elseif(Auth::getDefaultDriver() === 'siswa')
                         <li {{ Route::currentRouteName() === 'siswa.ajukan' ? 'class=active' : '' }}>
                             <a href="{{ route('siswa.ajukan') }}"><i class="fa fa-paper-plane"></i>Ajukan Industri</a>
                         </li>

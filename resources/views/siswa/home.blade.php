@@ -28,6 +28,11 @@
                     <h3 class="ineu">Selamat datang {{ Auth::user()->nama }}</h3>
                 </div>
             </div>
+            @if(session('status'))
+                <div class="alert alert-danger">
+                    Siswa sudah memilih industri
+                </div>
+            @endif
             <div class="row justify-content-around">
                 <div class="col-sm-6 col-md-4 col-lg-3 kartu p-1 ">
                     <div class="card d-flex">
@@ -42,6 +47,7 @@
                                 Ajukan industri dari luar
                                 rekomendasi sekolah.
                             </div>
+                            <a href="{{ route('siswa.ajukan') }}" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -58,6 +64,7 @@
                                 Pilih industri untuk
                                 prakerin.
                             </div>
+                            <a href="{{ route('siswa.pilih') }}" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>

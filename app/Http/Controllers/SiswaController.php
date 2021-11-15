@@ -52,7 +52,7 @@ class SiswaController extends Controller
     {
         // Jika siswa sudah masuk, jangan pilih lagi
         if (Auth::user()->id_industri) {
-            return back();
+            return redirect(route('siswa.home'))->with('status', 'false');
         }
 
         // TODO: Hanya ambil yang kuotanya masih kosong

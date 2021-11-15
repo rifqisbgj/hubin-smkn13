@@ -20,7 +20,7 @@ class AjukanController extends Controller
     {
         // JIka sudah masuk tidak boleh mengajukan
         if (Auth::user()->id_industri) {
-            return back();
+            return redirect(route('siswa.home'))->with('status', 'false');
         }
 
         return view('siswa.ajukan');

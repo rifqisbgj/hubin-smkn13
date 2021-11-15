@@ -64,7 +64,7 @@
                         {{ "$industri->siswa_count/$industri->kuota" }}
                     </td>
                     <td class="text-center">
-                        <a type="button" class="btn btn-sm btn-outline-primary" href="#">Detail</a>
+                        <a type="button" class="btn btn-sm btn-outline-primary" href="{{ route('detail', ['id' => $industri->id]) }}">Detail</a>
                     </td>
                 </tr>
                 @empty

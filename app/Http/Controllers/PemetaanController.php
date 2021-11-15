@@ -17,4 +17,21 @@ class PemetaanController extends Controller
 
         return view('pemetaan')->with('dataindustri', $dataindustri);
     }
+
+    public function detail($id)
+    {
+        /*
+        $industri = Industri::withCount('siswa')
+            ->toBase()
+            ->where('id', $id)
+            ->get();
+         */
+        $industri = Industri::withCount('siswa')->find($id);
+        $siswa = $industri->siswa;
+
+        return view('detail')->with([
+            'industri' => $industri,
+            'siswa' => $siswa,
+        ]);
+    }
 }

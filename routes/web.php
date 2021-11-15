@@ -23,6 +23,7 @@ Auth::routes([
 Route::view('/tentang', 'tentang')->name('tentang');
 
 Route::get('/pemetaan', 'PemetaanController@index')->name('pemetaan');
+Route::get('/detail/{id}', 'PemetaanController@detail')->name('detail');
 
 /* Nama Route: siswa
  * URL Route: /

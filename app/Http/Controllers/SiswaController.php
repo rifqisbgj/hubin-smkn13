@@ -64,4 +64,23 @@ class SiswaController extends Controller
 
         return view('siswa.pilih')->with('dataindustri', $dataindustri);
     }
+
+    public function detail($id)
+    {
+        $industri = Industri::withCount('siswa')->find($id);
+        $siswa = $industri->siswa;
+
+        return view('siswa.detail')->with([
+            'industri' => $industri,
+            'siswa' => $siswa,
+        ]);
+    }
+
+    public function pilihSubmit(Request $request)
+    {
+        Siswa::where('nis', Auth::user()->nis)
+            ->update(['id_industri' => $request->id_industri]);
+
+        return redirect(route('siswa.home'))->with('success', true);
+    }
 }

@@ -33,6 +33,11 @@
                     Siswa sudah memilih industri
                 </div>
             @endif
+            @if(session('success'))
+                <div class="alert alert-success">
+                    Sukses memasuki industri, harap tunggu informasi selanjutnya dari pembimbing
+                </div>
+            @endif
             <div class="row justify-content-around">
                 <div class="col-sm-6 col-md-4 col-lg-3 kartu p-1 ">
                     <div class="card d-flex">

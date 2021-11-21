@@ -42,6 +42,8 @@ Route::name('siswa.')->group(function () {
     Route::post('/ajukan', 'AjukanController@submit')->name('ajukan.submit');
 
     Route::get('/pilih', 'SiswaController@pilih')->name('pilih');
+    Route::get('/pilih/{id}', 'SiswaController@detail')->where('id', '[0-9]+')->name('pilih.detail');
+    Route::post('/pilih', 'SiswaController@pilihSubmit')->name('pilih.submit');
 });
 
 /* Nama Route: admin

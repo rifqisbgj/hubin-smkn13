@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pemetaan')
+@section('title', 'Hasil Pemetaan')
 
 @push('script')
     <script src="{{ asset('js/kit.fontawesome.91b3159b57.js') }}"></script>
@@ -16,7 +16,7 @@
     <div class="container">
 
         <header>
-            <h1 class="font-weight-bolder py-2">Lihat Pemetaan</h1>
+            <h1 class="font-weight-bolder py-2">Hasil Pemetaan</h1>
         </header>
 
         <input class="form-control" id="cari" placeholder="Cari Industri">
@@ -31,7 +31,8 @@
                     <th scope="col">Alamat</th>
                     <th scope="col" class="text-center">Jurusan</th>
                     <th scope="col" class="text-center">Kuota</th>
-                    <th scope="col" class="text-center">Aksi</th>
+                    <th scope="col" class="text-center">Pembimbing</th>
+                    <th scope="col" class="text-center">Siswa</th>
                 </tr>
             </thead>
             <tbody class="data" id="cariTabel">
@@ -64,7 +65,14 @@
                         {{ "$industri->siswa_count/$industri->kuota" }}
                     </td>
                     <td class="text-center">
-                        <a type="button" class="btn btn-sm btn-outline-primary" href="{{ route('detail', ['id' => $industri->id]) }}">Detail</a>
+                        {{ $industri->nama_pembimbing }} {{ $industri->nip_pembimbing ? "($industri->nip_pembimbing)" : ''}}
+                    </td>
+                    <td>
+                        <ol>
+                            @foreach ($industri->siswa as $siswa)
+                                <li>{{ "$siswa->nama ($siswa->nis)" }}</li>
+                            @endforeach
+                        </ol>
                     </td>
                 </tr>
                 @empty

@@ -45,11 +45,11 @@
 					<li {{ Route::currentRouteName() === 'siswa.home' ? 'class=active' : '' }}>
 						<a href="{{ route('siswa.home') }}"><i class="fa fa-home"></i>Home</a>
 					</li>
-					<li>
-                        <a href="#"><i class="fa fa-eye"></i>Lihat Data Pemetaan</a>
-					</li>
 					<li {{ Route::currentRouteName() === 'pemetaan' ? 'class=active' : '' }}>
-                        <a href="{{ route('pemetaan') }}"><i class="fa fa-check"></i>Hasil Data Pemetaan</a>
+                        <a href="{{ route('pemetaan') }}"><i class="fa fa-eye"></i>Lihat Data Pemetaan</a>
+					</li>
+					<li {{ Route::currentRouteName() === 'hasil' ? 'class=active' : '' }}>
+                        <a href="{{ route('hasil') }}"><i class="fa fa-check"></i>Hasil Data Pemetaan</a>
 					</li>
                     @if(Auth::getDefaultDriver() === 'admin')
                         <li {{ Route::currentRouteName() === 'admin.siswa.data' ? 'class=active' : '' }}>

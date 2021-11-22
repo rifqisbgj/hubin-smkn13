@@ -20,12 +20,6 @@ class PemetaanController extends Controller
 
     public function detail($id)
     {
-        /*
-        $industri = Industri::withCount('siswa')
-            ->toBase()
-            ->where('id', $id)
-            ->get();
-         */
         $industri = Industri::withCount('siswa')->find($id);
         $siswa = $industri->siswa;
 
@@ -33,5 +27,17 @@ class PemetaanController extends Controller
             'industri' => $industri,
             'siswa' => $siswa,
         ]);
+    }
+
+    public function hasil()
+    {
+        $dataindustri = Industri::withCount('siswa')
+            ->whereNotNull('nama_pembimbing')
+            ->orWhereNotNull('nip_pembimbing')
+            ->havingRaw('siswa_count = kuota')
+            ->orderBy('nama')
+            ->getModels();
+
+        return view('hasil')->with('dataindustri', $dataindustri);
     }
 }

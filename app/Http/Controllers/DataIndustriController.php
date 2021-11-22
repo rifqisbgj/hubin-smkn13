@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\DataIndustri;
 use App\Exports\IndustriExport;
+use App\Exports\IndustriSiswaExport;
 use App\Imports\IndustriImport;
 use App\Industri;
 use App\Siswa;
@@ -91,6 +92,11 @@ class DataIndustriController extends Controller
     public function download()
     {
         return Excel::download(new IndustriExport, 'Industri.xlsx');
+    }
+
+    public function downloadWithSiswa()
+    {
+        return Excel::download(new IndustriSiswaExport, 'IndustriSiswa.xlsx');
     }
 
     public function upload(Request $request)

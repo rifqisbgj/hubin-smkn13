@@ -23,6 +23,7 @@ Auth::routes([
 Route::view('/tentang', 'tentang')->name('tentang');
 
 Route::get('/pemetaan', 'PemetaanController@index')->name('pemetaan');
+Route::get('/hasil', 'PemetaanController@hasil')->name('hasil');
 Route::get('/detail/{id}', 'PemetaanController@detail')->name('detail');
 
 /* Nama Route: siswa
@@ -92,6 +93,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/update', 'DataIndustriController@update')->name('update');
 
             Route::get('/download', 'DataIndustriController@download')->name('download');
+            Route::get('/downloadSiswa', 'DataIndustriController@downloadWithSiswa')->name('downloadWithSiswa');
             Route::post('/upload', 'DataIndustriController@upload')->name('upload');
         });
     });

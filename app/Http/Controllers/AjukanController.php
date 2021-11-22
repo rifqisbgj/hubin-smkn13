@@ -20,7 +20,10 @@ class AjukanController extends Controller
     {
         // JIka sudah masuk tidak boleh mengajukan
         if (Auth::user()->id_industri) {
-            return redirect(route('siswa.home'))->with('status', 'false');
+            return redirect(route('siswa.home'))->with([
+                'alert' => 'danger',
+                'message' => 'Siswa sudah memasuki industri',
+            ]);
         }
 
         return view('siswa.ajukan');
@@ -101,7 +104,7 @@ class AjukanController extends Controller
                 }
             } else {
                 return cancel($id_industri, $request, [
-                    'industri' => "Salah satu sudah memasuki industri",
+                    'industri' => "Salah satu siswa sudah memasuki industri",
                 ]);
             }
         }

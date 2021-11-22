@@ -28,14 +28,9 @@
                     <h3 class="ineu">Selamat datang {{ Auth::user()->nama }}</h3>
                 </div>
             </div>
-            @if(session('status'))
-                <div class="alert alert-danger">
-                    Siswa sudah memilih industri
-                </div>
-            @endif
-            @if(session('success'))
-                <div class="alert alert-success">
-                    Sukses memasuki industri, harap tunggu informasi selanjutnya dari pembimbing
+            @if(session('alert'))
+                <div class="alert alert-{{ session('alert') }}">
+                    {{ session('message') }}
                 </div>
             @endif
             <div class="row justify-content-around">

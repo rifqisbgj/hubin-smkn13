@@ -259,6 +259,9 @@
                         <div class="col-auto">
                             <a class="btn btn-success" href="{{ route('admin.industri.download') }}">Download (.xlsx)</a>
                         </div>
+                        <div class="col-auto">
+                            <a class="btn btn-success" href="{{ route('admin.industri.downloadWithSiswa') }}">Download dengan data siswa(.xlsx)</a>
+                        </div>
                     </form>
                 </div>
             </div>

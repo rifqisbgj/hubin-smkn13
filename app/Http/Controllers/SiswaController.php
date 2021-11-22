@@ -52,7 +52,10 @@ class SiswaController extends Controller
     {
         // Jika siswa sudah masuk, jangan pilih lagi
         if (Auth::user()->id_industri) {
-            return redirect(route('siswa.home'))->with('status', 'false');
+            return redirect(route('siswa.home'))->with([
+                'alert' => 'danger',
+                'message' => 'Siswa sudah memasuki industri',
+            ]);
         }
 
         // TODO: Hanya ambil yang kuotanya masih kosong
@@ -78,9 +81,21 @@ class SiswaController extends Controller
 
     public function pilihSubmit(Request $request)
     {
+        $industri = Industri::withCount('siswa')
+            ->find($request->id_industri);
+
+        // Validasi jika kuota industri penuh
+        if ($industri->siswa_count >= $industri->kuota) {
+            return redirect('siswa.home')->with([
+            ]);
+        }
+
         Siswa::where('nis', Auth::user()->nis)
             ->update(['id_industri' => $request->id_industri]);
 
-        return redirect(route('siswa.home'))->with('success', true);
+        return redirect(route('siswa.home'))->with([
+            'alert' => 'success',
+            'message' => 'Sukses memasuki industri, harap tunggu informasi selanjutnya dari pembimbing',
+        ]);
     }
 }
